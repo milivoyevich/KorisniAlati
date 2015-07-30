@@ -11,20 +11,30 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 using System.Reflection;
+using unoidl.com.sun.star.lang;
+using unoidl.com.sun.star.frame;
+using unoidl.com.sun.star.beans;
+using unoidl.com.sun.star.sheet;
+using unoidl.com.sun.star.container;
+using unoidl.com.sun.star.table;
+using unoidl.com.sun.star.text;
+using unoidl.com.sun.star.uno;
+using unoidl.com.sun.star.accessibility;
 
 namespace KorisniAlati
 {
-    public partial class Form1 : Form
+    public partial class fGlavna : Form
     {
-        public Form1()
+        public fGlavna()
         {
             InitializeComponent();
         }
-        string initKonekt = @"Data Source=.\sqlexpress;Initial Catalog=NORTHWND;Integrated Security=True";
+        string initKonekt = @"Data Source=.\sqlexpress; Initial Catalog=AdventureWorks2012;User ID=sa; Password=vdm191100";
         SqlConnection konekcija = new SqlConnection();
         SqlCommand komanda=new SqlCommand(@"SELECT * FROM information_schema.tables where TABLE_TYPE='BASE TABLE'");
         SqlDataAdapter adapter = new SqlDataAdapter();
         DataTable tabela, ttabla, tempt;
+        DataSet ds=new DataSet();
         private void Form1_Load(object sender, EventArgs e)
         {
             txtKonekcija.Text = initKonekt;
@@ -33,11 +43,11 @@ namespace KorisniAlati
         private void btnKonekt_Click(object sender, EventArgs e)
         {
             komanda.CommandText = "";
-            if (chkbTable.Checked) komanda.CommandText = @"SELECT 'table' as TIP, TABLE_NAME FROM information_schema.tables where TABLE_TYPE='BASE TABLE'";
+            if (chkbTable.Checked) komanda.CommandText = @"SELECT 'table' as TIP, TABLE_SCHEMA+'.'+TABLE_NAME as Tabela FROM information_schema.tables where TABLE_TYPE='BASE TABLE'";
             if (chkbView.Checked)
             {
                 if (komanda.CommandText.Length > 0) komanda.CommandText += " UNION ";
-                komanda.CommandText += "SELECT 'view' as TIP, TABLE_NAME FROM information_schema.views";
+                komanda.CommandText += "SELECT 'view' as TIP, TABLE_SCHEMA+'.'+TABLE_NAME as Tabela FROM information_schema.views";
             }
             if (chkbProc.Checked)
             {
@@ -55,7 +65,7 @@ namespace KorisniAlati
             adapter.Fill(tabela);
             listBox1.DataSource = null;
             listBox1.DataSource = tabela;
-            listBox1.DisplayMember = "TABLE_NAME";
+            listBox1.DisplayMember = "Tabela";
             //foreach (DataRow red in tabela.Rows)
             //{
             //    ttabla = new DataTable();
@@ -72,19 +82,20 @@ namespace KorisniAlati
         }
         private void btnPoco_Click(object sender, EventArgs e)
         {
-            bool moze_null = false;
+                 bool moze_null = false;
             if (listBox1.SelectedIndex > -1)
             {
-                ttabla = new DataTable(); tempt = new DataTable();
-                komanda.CommandText = "SELECT TOP 1 * FROM [" + listBox1.Text + "]";
+                ttabla = new DataTable(listBox1.Text.Substring(listBox1.Text.IndexOf(".")+1)); tempt = new DataTable();
+                komanda.CommandText = "SELECT TOP 1 * FROM " + listBox1.Text + "";
                 richTextBox1.AppendText("[Serializable]\n");
-                richTextBox1.AppendText("public class " + listBox1.Text + "\n{\n");
+                richTextBox1.AppendText("public class " + listBox1.Text.Substring(listBox1.Text.IndexOf(".") + 1) + "\n{\n");
                 adapter.Fill(ttabla);
                 komanda.CommandText = "Select name, type_name(user_type_id) as Type, is_nullable as Nullable from sys.all_columns" +
                 " where object_id = OBJECT_ID('" + listBox1.Text + "')"; //
                 adapter.Fill(tempt);
                 richTextBox1.AppendText("#region Konstruktor\n\n");
-                richTextBox1.AppendText("public " + listBox1.Text + "():base()\n{\n}\n");
+                richTextBox1.AppendText("public " + listBox1.Text.Substring(listBox1.Text.IndexOf(".") + 1) + "():base()\n{\n"+
+                "      this.rowVersion = new byte[8];\n      SetNew();\n}\n");
                 richTextBox1.AppendText("\n#endregion\n\n");
                 richTextBox1.AppendText("#region Chlanovi\n\n");
                 foreach (DataColumn kolona in ttabla.Columns)
@@ -93,6 +104,9 @@ namespace KorisniAlati
                   if (redovi != null && redovi.Length == 1) moze_null = (bool)redovi[0]["Nullable"];
                     richTextBox1.AppendText("private " + kolona.DataType.Name + ((moze_null && kolona.DataType.Name.ToLower() != "string") ? "?" : "") + " _" + kolona.ColumnName + ";\n");
                 }
+                richTextBox1.AppendText("\nprotected byte[] rowVersion = null;\nprotected bool isNew = false;"+
+                "\nprotected bool isDirty = false;\nprotected bool isDeleted = false;\n\n[NonSerialized]"+
+                "\nprotected object originalValue = null;\n");
                 richTextBox1.AppendText("\n#endregion\n\n");
                 richTextBox1.AppendText("#region Osobine\n\n");
                 foreach (DataColumn kolona in ttabla.Columns)
@@ -103,7 +117,7 @@ namespace KorisniAlati
                         ((moze_null && kolona.DataType.Name.ToLower() != "string") ? "?" : "") + 
                         " " + kolona.ColumnName + " {\n      get { return _" + kolona.ColumnName + 
                         " ; }\n      set \n      {\n         if(_" + kolona.ColumnName + " != value)\n         {\n             _" + 
-                        kolona.ColumnName + "=value;\n            SetDirty();\n         }\n      }\n");
+                        kolona.ColumnName + "=value;\n            SetDirty();\n         }\n      }\n}\n");
                 }
                 richTextBox1.AppendText("\n#endregion\n\n");
                 richTextBox1.AppendText("#region nadjacane Osobine\n\n");
@@ -113,8 +127,8 @@ namespace KorisniAlati
                 richTextBox1.AppendText("public override void SetClean()\n{\n      this.isDirty = false;\n}\n");
                 richTextBox1.AppendText("public override void SetOld()\n{\n      this.isNew = false;\n}\n");
                 richTextBox1.AppendText("protected override object Copy(object src, object dst)\n{\n         "+
-                 listBox1.Text + " from = (" + listBox1.Text + ")src;\n         "
-             + listBox1.Text + " to = (" + listBox1.Text + ")dst;\n\n"+
+                 listBox1.Text + " from = (" + listBox1.Text.Substring(listBox1.Text.IndexOf(".") + 1) + ")src;\n         "
+             + listBox1.Text + " to = (" + listBox1.Text.Substring(listBox1.Text.IndexOf(".") + 1) + ")dst;\n\n" +
             "         to.id = from.id;\n         to.sifra = from.sifra;\n         to.rowVersion = from.rowVersion;\n\n"+
             "         to.isNew = from.isNew;\n         to.isDirty = from.isDirty;\n         to.isDeleted = from.isDeleted;\n\n");
                 foreach (DataColumn kolona in ttabla.Columns)
@@ -123,7 +137,7 @@ namespace KorisniAlati
                 }
                 richTextBox1.AppendText("\n         return dst;\n}\n");
                 richTextBox1.AppendText("public override object Clone()\n      {\n         "+
-                listBox1.Text + " clone = (" + listBox1.Text + ")Copy(this, new " + listBox1.Text + "());" +
+                listBox1.Text.Substring(listBox1.Text.IndexOf(".") + 1) + " clone = (" + listBox1.Text.Substring(listBox1.Text.IndexOf(".") + 1) + ")Copy(this, new " + listBox1.Text.Substring(listBox1.Text.IndexOf(".") + 1) + "());" +
                 "\n         return clone;\n      }\n");
                 richTextBox1.AppendText("public override bool Validate(out string message)\n{\n      "+
                 "bool validno = true;\n      message = string.Empty;\n      \n      return validno;\n}\n");
@@ -132,12 +146,12 @@ namespace KorisniAlati
                 richTextBox1.AppendText("public override int GetHashCode()\n{\n      return base.GetHashCode();\n}\n");
                 richTextBox1.AppendText("public override bool Equals(object obj)\n{\n      "+
                     "if ((obj == null) || (GetType() != obj.GetType()))\n      {\n         return false;\n      }\n"+
-                    "      " + listBox1.Text + " ps = (" + listBox1.Text + ")obj;\n      "+
-                    "return this." + listBox1.Text + " == ps." + listBox1.Text + ";\n}\n");
-                richTextBox1.AppendText("public static bool operator ==(" + listBox1.Text + " po1, " + listBox1.Text + " po2)\n" +
+                    "      " + listBox1.Text.Substring(listBox1.Text.IndexOf(".") + 1) + " ps = (" + listBox1.Text.Substring(listBox1.Text.IndexOf(".") + 1) + ")obj;\n      " +
+                    "return this." + listBox1.Text.Substring(listBox1.Text.IndexOf(".") + 1) + " == ps." + listBox1.Text.Substring(listBox1.Text.IndexOf(".") + 1) + ";\n}\n");
+                richTextBox1.AppendText("public static bool operator ==(" + listBox1.Text.Substring(listBox1.Text.IndexOf(".") + 1) + " po1, " + listBox1.Text.Substring(listBox1.Text.IndexOf(".") + 1) + " po2)\n" +
                     "{\n      if ((ReferenceEquals(po1, null)))\n      {\n         return ReferenceEquals(po2, null);\n"+
                     "      }\n      else\n      {\n         return po1.Equals(po2);\n      }\n}\n");
-                richTextBox1.AppendText("public static bool operator !=(JciHdr po1, JciHdr po2)\n"+
+                richTextBox1.AppendText("public static bool operator !=(" + listBox1.Text.Substring(listBox1.Text.IndexOf(".") + 1) + " po1, " + listBox1.Text.Substring(listBox1.Text.IndexOf(".") + 1) + " po2)\n" +
                     "{\n      return !(po1 == po2);\n}\n");
                 richTextBox1.AppendText("\n#endregion\n\n");
                 richTextBox1.AppendText("}\n");
@@ -230,6 +244,109 @@ namespace KorisniAlati
             serijal.Serialize(writer, Dokument,nsSer);
             rbtxtXML.AppendText(sb.ToString());
         }
-        
+		void BtnExcelClick(object sender, EventArgs e)
+		{
+			if(	openFileDialog1.ShowDialog()==DialogResult.OK)
+			{
+				switch(openFileDialog1.SafeFileName.Substring(openFileDialog1.SafeFileName.IndexOf(".")+1).ToLower())
+				{
+					case "xls":	ds=ExcelImport.ImportExcelXLS(openFileDialog1.FileName,true);
+							//int br=0;
+//							foreach (DataTable dtt in ds.Tables ) {
+//							dtt.TableName=dtt.TableName.Replace("$","");
+//							//dtt.TableName="Strana"+(++br).ToString();
+//							}
+					break;
+					case "xlsx": ds=ExcelImport.ImportExcelXLSX(openFileDialog1.FileName,true); break;
+				default: 	Stream ss=File.OpenRead(openFileDialog1.FileName);
+				ds=ExcelImport.ImportExcelXML(ss,true,false);		break;
+				}		
+		        foreach(DataTable tabela in  ds.Tables)
+                {
+                    foreach(DataRow red in tabela.Rows)
+                    {
+                        string sred = "";
+                        foreach(object polje in red.ItemArray)
+                        {
+                            sred = sred + polje.ToString().Trim();
+                        }
+                        if (sred.Trim() == "") red.Delete();
+                    }
+                }
+				dgExcel.DataSource=ds;
+				openFileDialog1.Dispose();
+			}
+			
+		}
+		void BtnExportExcelClick(object sender, EventArgs e)
+		{
+			ExcelClass.exportToExcel(ds, "Proba.xml");
+		}
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd1 = new SaveFileDialog();
+            sfd1.FileName = "PPP.xls";
+            sfd1.Filter = "(.xls)|Excel files";
+            sfd1.DefaultExt = ".xls";
+            if (sfd1.ShowDialog() == DialogResult.OK)
+            {
+                XComponentContext oStrap = uno.util.Bootstrap.bootstrap();
+                XMultiServiceFactory oServMan = (XMultiServiceFactory)oStrap.getServiceManager();
+                XComponentLoader desktop = (XComponentLoader)oServMan.createInstance("com.sun.star.frame.Desktop");
+                string url = @"private:factory/scalc";
+                PropertyValue[] loadProps = new PropertyValue[3];
+                loadProps[0] = new PropertyValue();
+                loadProps[0].Name = "Hidden";
+                loadProps[0].Value = new uno.Any(true);
+                loadProps[1] = new PropertyValue();
+                loadProps[1].Name = "FilterName";
+                loadProps[1].Value = new uno.Any("MS Excel 97");
+                loadProps[2] = new PropertyValue();
+                loadProps[2].Name = "ReadOnly";
+                loadProps[2].Value = new uno.Any(false);
+                XComponent document = desktop.loadComponentFromURL(url, "_blank", 0, loadProps);
+                XSpreadsheets oSheets = ((XSpreadsheetDocument)document).getSheets();
+                XIndexAccess oSheetsIA = (XIndexAccess)oSheets;
+                XSpreadsheet sheet = (XSpreadsheet)oSheetsIA.getByIndex(0).Value;
+                int ii = 0; XCell celija = null;
+                foreach(DataColumn kol in ds.Tables[0].Columns){
+                    celija = sheet.getCellByPosition(ii, 0);
+                    ((XText)celija).setString(kol.ColumnName);
+                    ((XPropertySet)celija).setPropertyValue("CellBackColor", new uno.Any(654321));
+                    ((XPropertySet)celija).setPropertyValue("CharColor", new uno.Any(333444));
+                    ii++;
+                }
+                ds.Tables[0].AcceptChanges(); ii = 0;
+                foreach (DataRow red in ds.Tables[0].Rows)
+                {
+                    int jj = 0; ii++;
+                    foreach (object ob in red.ItemArray)
+                    {
+                        celija = sheet.getCellByPosition(jj, ii);
+                        ((XText)celija).setString(ob.ToString());
+                        ((XPropertySet)celija).setPropertyValue("CellBackColor", new uno.Any(888777));
+                        jj++;
+                    }
+                }             
+                ((XStorable)document).storeToURL("file:///" + sfd1.FileName.Replace(@"\", "/"), loadProps);
+                System.Diagnostics.Process.Start(sfd1.FileName);
+            }
+        }
+
+        private void btnBind_Click(object sender, EventArgs e)
+        {
+            Address fAdresa = new Address();
+           MessageBox.Show( fAdresa.IsNew.ToString()+fAdresa.IsDirty.ToString()+fAdresa.IsDeleted.ToString());
+          
+        }
+
+        private void linqToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fLinq forma = new fLinq();
+            forma.ShowDialog();
+        }
+		
+		
     }
 }
