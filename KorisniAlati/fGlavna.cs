@@ -334,6 +334,11 @@ namespace KorisniAlati
             }
         }
 
+        private void btnScabb_Click(object sender, EventArgs e)
+        {
+           MessageBox.Show( SCABB.SCABox.SetSCAVendorData("", ""));
+        }
+
         private void btnBind_Click(object sender, EventArgs e)
         {
             Address fAdresa = new Address();

@@ -54,6 +54,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.linqToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnScabb = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpPOCO.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -187,6 +188,7 @@
             // tpXML
             // 
             this.tpXML.BackColor = System.Drawing.Color.LightSalmon;
+            this.tpXML.Controls.Add(this.btnScabb);
             this.tpXML.Controls.Add(this.btnXML);
             this.tpXML.Controls.Add(this.rbtxtXML);
             this.tpXML.Location = new System.Drawing.Point(4, 22);
@@ -331,6 +333,16 @@
             this.linqToolStripMenuItem.Text = "LINQ";
             this.linqToolStripMenuItem.Click += new System.EventHandler(this.linqToolStripMenuItem_Click);
             // 
+            // btnScabb
+            // 
+            this.btnScabb.Location = new System.Drawing.Point(52, 160);
+            this.btnScabb.Name = "btnScabb";
+            this.btnScabb.Size = new System.Drawing.Size(75, 23);
+            this.btnScabb.TabIndex = 2;
+            this.btnScabb.Text = "Servisi";
+            this.btnScabb.UseVisualStyleBackColor = true;
+            this.btnScabb.Click += new System.EventHandler(this.btnScabb_Click);
+            // 
             // fGlavna
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -388,6 +400,7 @@
         private System.Windows.Forms.Button btnBind;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem linqToolStripMenuItem;
+        private System.Windows.Forms.Button btnScabb;
     }
 }
 
