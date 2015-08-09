@@ -55,6 +55,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.linqToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnScabb = new System.Windows.Forms.Button();
+            this.btnDodeli = new System.Windows.Forms.Button();
+            this.btnObjavi = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpPOCO.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -188,6 +190,8 @@
             // tpXML
             // 
             this.tpXML.BackColor = System.Drawing.Color.LightSalmon;
+            this.tpXML.Controls.Add(this.btnObjavi);
+            this.tpXML.Controls.Add(this.btnDodeli);
             this.tpXML.Controls.Add(this.btnScabb);
             this.tpXML.Controls.Add(this.btnXML);
             this.tpXML.Controls.Add(this.rbtxtXML);
@@ -335,13 +339,33 @@
             // 
             // btnScabb
             // 
-            this.btnScabb.Location = new System.Drawing.Point(52, 160);
+            this.btnScabb.Location = new System.Drawing.Point(30, 101);
             this.btnScabb.Name = "btnScabb";
             this.btnScabb.Size = new System.Drawing.Size(75, 23);
             this.btnScabb.TabIndex = 2;
             this.btnScabb.Text = "Servisi";
             this.btnScabb.UseVisualStyleBackColor = true;
             this.btnScabb.Click += new System.EventHandler(this.btnScabb_Click);
+            // 
+            // btnDodeli
+            // 
+            this.btnDodeli.Location = new System.Drawing.Point(30, 177);
+            this.btnDodeli.Name = "btnDodeli";
+            this.btnDodeli.Size = new System.Drawing.Size(75, 23);
+            this.btnDodeli.TabIndex = 3;
+            this.btnDodeli.Text = "Dodeli";
+            this.btnDodeli.UseVisualStyleBackColor = true;
+            this.btnDodeli.Click += new System.EventHandler(this.btnDodeli_Click);
+            // 
+            // btnObjavi
+            // 
+            this.btnObjavi.Location = new System.Drawing.Point(30, 216);
+            this.btnObjavi.Name = "btnObjavi";
+            this.btnObjavi.Size = new System.Drawing.Size(75, 23);
+            this.btnObjavi.TabIndex = 4;
+            this.btnObjavi.Text = "Objavi";
+            this.btnObjavi.UseVisualStyleBackColor = true;
+            this.btnObjavi.Click += new System.EventHandler(this.btnObjavi_Click);
             // 
             // fGlavna
             // 
@@ -401,6 +425,8 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem linqToolStripMenuItem;
         private System.Windows.Forms.Button btnScabb;
+        private System.Windows.Forms.Button btnObjavi;
+        private System.Windows.Forms.Button btnDodeli;
     }
 }
 

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fLinq));
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.SuspendLayout();
             // 
             // fLinq
@@ -36,7 +37,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MediumAquamarine;
-            this.ClientSize = new System.Drawing.Size(614, 421);
+            this.ClientSize = new System.Drawing.Size(666, 447);
             this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.Color.SaddleBrown;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -44,10 +45,13 @@
             this.Name = "fLinq";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "fLinq";
+            this.Load += new System.EventHandler(this.fLinq_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }

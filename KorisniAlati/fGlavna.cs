@@ -339,6 +339,19 @@ namespace KorisniAlati
            MessageBox.Show( SCABB.SCABox.SetSCAVendorData("", ""));
         }
 
+        private void btnDodeli_Click(object sender, EventArgs e)
+        {
+            StaticKlasa.broj += 100;
+            StaticKlasa.tekst = "Прича";
+            StaticKlasa.datum = DateTime.Now;
+           
+        }
+
+        private void btnObjavi_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(StaticKlasa.broj.ToString() + "-" + StaticKlasa.tekst + "-" + StaticKlasa.datum.ToString());
+        }
+
         private void btnBind_Click(object sender, EventArgs e)
         {
             Address fAdresa = new Address();

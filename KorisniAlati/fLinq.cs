@@ -15,5 +15,10 @@ namespace KorisniAlati
         {
             InitializeComponent();
         }
+
+        private void fLinq_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
