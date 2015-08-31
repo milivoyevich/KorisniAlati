@@ -38,6 +38,7 @@ namespace KorisniAlati
         private void Form1_Load(object sender, EventArgs e)
         {
             txtKonekcija.Text = initKonekt;
+            dgExcel.DataSource = StaticKlasa.Tpersona;
         }
 
         private void btnKonekt_Click(object sender, EventArgs e)
@@ -352,19 +353,63 @@ namespace KorisniAlati
             MessageBox.Show(StaticKlasa.broj.ToString() + "-" + StaticKlasa.tekst + "-" + StaticKlasa.datum.ToString());
         }
 
-        private void btnBind_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            Address fAdresa = new Address();
-           MessageBox.Show( fAdresa.IsNew.ToString()+fAdresa.IsDirty.ToString()+fAdresa.IsDeleted.ToString());
-          
+            dgExcel.DataSource = StaticKlasa.Tpersona;
+
         }
 
+        private void btnBind_Click(object sender, EventArgs e)
+        {
+            DataSet ds = new DataSet();
+            richTextBox2.Clear();
+            // Address fAdresa = new Address();
+            //MessageBox.Show( fAdresa.IsNew.ToString()+fAdresa.IsDirty.ToString()+fAdresa.IsDeleted.ToString());
+            try {
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                    ds.ReadXmlSchema(openFileDialog1.FileName);
+                ds.WriteXmlSchema("Carina.xsd");
+                dataGrid1.DataSource = ds;
+                foreach(DataTable tabla in ds.Tables)
+                {
+                    richTextBox2.AppendText("\n\n"+tabla.TableName + "\n");
+                    foreach(DataColumn kolona in tabla.Columns)
+                    {
+                        richTextBox2.AppendText(AliasType(kolona.DataType.Name) + ", ");
+                    }
+                }
+            }
+            catch(System.Exception ex) { MessageBox.Show( ex.Message); }
+        }
+        
         private void linqToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fLinq forma = new fLinq();
             forma.ShowDialog();
         }
-		
+		private string AliasType(string tip)
+        {
+           string novTip = tip;
+            switch (tip)
+            {
+                case "Object": novTip = "object"; break;
+                case "String": novTip = "string"; break;
+                case "Boolean": novTip = "bool"; break;
+                case "Byte": novTip = "byte"; break;
+                case "SByte": novTip = "sbyte"; break;
+                case "Int16": novTip = "short"; break;
+                case "UInt16": novTip = "ushort"; break;
+                case "Int32": novTip = "int"; break;
+                case "UInt32": novTip = "uint"; break;
+                case "Int64": novTip = "long"; break;
+                case "UInt64": novTip = "ulong"; break;
+                case "Single": novTip = "float"; break;
+                case "Double": novTip = "double"; break;
+                case "Decimal": novTip = "decimal"; break;
+                case "Char": novTip = "char"; break;
+            }
+            return novTip;
+        }
 		
     }
 }

@@ -111,11 +111,14 @@ public virtual Object SpatialLocation {
       get { return _SpatialLocation ; }
       set 
       {
-         if(!_SpatialLocation.Equals(value))
-         {
-             _SpatialLocation=value;
-            SetDirty();
-         }
+                if (_SpatialLocation != null)
+                {
+                    if (!_SpatialLocation.Equals(value))
+                    {
+                        _SpatialLocation = value;
+                        SetDirty();
+                    }
+                }
       }}
 public virtual Guid rowguid {
       get { return _rowguid ; }

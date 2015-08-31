@@ -41,9 +41,13 @@
             this.chkbProc = new System.Windows.Forms.CheckBox();
             this.chkbTable = new System.Windows.Forms.CheckBox();
             this.tpXML = new System.Windows.Forms.TabPage();
+            this.btnObjavi = new System.Windows.Forms.Button();
+            this.btnDodeli = new System.Windows.Forms.Button();
+            this.btnScabb = new System.Windows.Forms.Button();
             this.btnXML = new System.Windows.Forms.Button();
             this.rbtxtXML = new System.Windows.Forms.RichTextBox();
             this.tpExcel = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnExportExcel = new System.Windows.Forms.Button();
             this.btnExcel = new System.Windows.Forms.Button();
@@ -54,9 +58,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.linqToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnScabb = new System.Windows.Forms.Button();
-            this.btnDodeli = new System.Windows.Forms.Button();
-            this.btnObjavi = new System.Windows.Forms.Button();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tpPOCO.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -202,6 +204,36 @@
             this.tpXML.TabIndex = 1;
             this.tpXML.Text = "toXML";
             // 
+            // btnObjavi
+            // 
+            this.btnObjavi.Location = new System.Drawing.Point(30, 216);
+            this.btnObjavi.Name = "btnObjavi";
+            this.btnObjavi.Size = new System.Drawing.Size(75, 23);
+            this.btnObjavi.TabIndex = 4;
+            this.btnObjavi.Text = "Objavi";
+            this.btnObjavi.UseVisualStyleBackColor = true;
+            this.btnObjavi.Click += new System.EventHandler(this.btnObjavi_Click);
+            // 
+            // btnDodeli
+            // 
+            this.btnDodeli.Location = new System.Drawing.Point(30, 177);
+            this.btnDodeli.Name = "btnDodeli";
+            this.btnDodeli.Size = new System.Drawing.Size(75, 23);
+            this.btnDodeli.TabIndex = 3;
+            this.btnDodeli.Text = "Dodeli";
+            this.btnDodeli.UseVisualStyleBackColor = true;
+            this.btnDodeli.Click += new System.EventHandler(this.btnDodeli_Click);
+            // 
+            // btnScabb
+            // 
+            this.btnScabb.Location = new System.Drawing.Point(30, 101);
+            this.btnScabb.Name = "btnScabb";
+            this.btnScabb.Size = new System.Drawing.Size(75, 23);
+            this.btnScabb.TabIndex = 2;
+            this.btnScabb.Text = "Servisi";
+            this.btnScabb.UseVisualStyleBackColor = true;
+            this.btnScabb.Click += new System.EventHandler(this.btnScabb_Click);
+            // 
             // btnXML
             // 
             this.btnXML.Location = new System.Drawing.Point(30, 53);
@@ -223,6 +255,7 @@
             // tpExcel
             // 
             this.tpExcel.BackColor = System.Drawing.Color.RosyBrown;
+            this.tpExcel.Controls.Add(this.button2);
             this.tpExcel.Controls.Add(this.button1);
             this.tpExcel.Controls.Add(this.btnExportExcel);
             this.tpExcel.Controls.Add(this.btnExcel);
@@ -232,6 +265,16 @@
             this.tpExcel.Size = new System.Drawing.Size(571, 387);
             this.tpExcel.TabIndex = 2;
             this.tpExcel.Text = "Import to Excel";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(461, 98);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(72, 24);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -284,6 +327,7 @@
             // tpBind
             // 
             this.tpBind.BackColor = System.Drawing.Color.Bisque;
+            this.tpBind.Controls.Add(this.richTextBox2);
             this.tpBind.Controls.Add(this.btnBind);
             this.tpBind.Controls.Add(this.dataGrid1);
             this.tpBind.Location = new System.Drawing.Point(4, 22);
@@ -294,10 +338,11 @@
             // 
             // btnBind
             // 
+            this.btnBind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBind.BackColor = System.Drawing.Color.PeachPuff;
             this.btnBind.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBind.ForeColor = System.Drawing.Color.SaddleBrown;
-            this.btnBind.Location = new System.Drawing.Point(403, 338);
+            this.btnBind.Location = new System.Drawing.Point(468, 355);
             this.btnBind.Name = "btnBind";
             this.btnBind.Size = new System.Drawing.Size(84, 24);
             this.btnBind.TabIndex = 1;
@@ -307,11 +352,13 @@
             // 
             // dataGrid1
             // 
+            this.dataGrid1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGrid1.DataMember = "";
             this.dataGrid1.HeaderForeColor = System.Drawing.SystemColors.ControlText;
-            this.dataGrid1.Location = new System.Drawing.Point(56, 56);
+            this.dataGrid1.Location = new System.Drawing.Point(236, 23);
             this.dataGrid1.Name = "dataGrid1";
-            this.dataGrid1.Size = new System.Drawing.Size(431, 251);
+            this.dataGrid1.Size = new System.Drawing.Size(316, 326);
             this.dataGrid1.TabIndex = 0;
             // 
             // openFileDialog1
@@ -333,39 +380,19 @@
             // linqToolStripMenuItem
             // 
             this.linqToolStripMenuItem.Name = "linqToolStripMenuItem";
-            this.linqToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
-            this.linqToolStripMenuItem.Text = "LINQ";
+            this.linqToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.linqToolStripMenuItem.Text = "Reports";
             this.linqToolStripMenuItem.Click += new System.EventHandler(this.linqToolStripMenuItem_Click);
             // 
-            // btnScabb
+            // richTextBox2
             // 
-            this.btnScabb.Location = new System.Drawing.Point(30, 101);
-            this.btnScabb.Name = "btnScabb";
-            this.btnScabb.Size = new System.Drawing.Size(75, 23);
-            this.btnScabb.TabIndex = 2;
-            this.btnScabb.Text = "Servisi";
-            this.btnScabb.UseVisualStyleBackColor = true;
-            this.btnScabb.Click += new System.EventHandler(this.btnScabb_Click);
-            // 
-            // btnDodeli
-            // 
-            this.btnDodeli.Location = new System.Drawing.Point(30, 177);
-            this.btnDodeli.Name = "btnDodeli";
-            this.btnDodeli.Size = new System.Drawing.Size(75, 23);
-            this.btnDodeli.TabIndex = 3;
-            this.btnDodeli.Text = "Dodeli";
-            this.btnDodeli.UseVisualStyleBackColor = true;
-            this.btnDodeli.Click += new System.EventHandler(this.btnDodeli_Click);
-            // 
-            // btnObjavi
-            // 
-            this.btnObjavi.Location = new System.Drawing.Point(30, 216);
-            this.btnObjavi.Name = "btnObjavi";
-            this.btnObjavi.Size = new System.Drawing.Size(75, 23);
-            this.btnObjavi.TabIndex = 4;
-            this.btnObjavi.Text = "Objavi";
-            this.btnObjavi.UseVisualStyleBackColor = true;
-            this.btnObjavi.Click += new System.EventHandler(this.btnObjavi_Click);
+            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.richTextBox2.Location = new System.Drawing.Point(24, 23);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(193, 339);
+            this.richTextBox2.TabIndex = 2;
+            this.richTextBox2.Text = "";
             // 
             // fGlavna
             // 
@@ -427,6 +454,8 @@
         private System.Windows.Forms.Button btnScabb;
         private System.Windows.Forms.Button btnObjavi;
         private System.Windows.Forms.Button btnDodeli;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.RichTextBox richTextBox2;
     }
 }
 

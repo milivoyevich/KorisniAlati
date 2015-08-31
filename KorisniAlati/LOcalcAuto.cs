@@ -11,6 +11,10 @@ using unoidl.com.sun.star.table;
 using unoidl.com.sun.star.text;
 using unoidl.com.sun.star.uno;
 using unoidl.com.sun.star.accessibility;
+using System.Data;
+using System.Data.SqlClient;
+using System.Reflection;
+using AutoMapper;
 
 namespace KorisniAlati
 {
@@ -55,6 +59,56 @@ namespace KorisniAlati
             propVals[0].Name = "FilterName";
             propVals[0].Value = new uno.Any("calc8");
             ((XStorable)oDoc).storeToURL(fileName, propVals);
+        }
+
+       
+      
+       
+        public List<Address> PersonaL()
+        {
+            List<Address> adrese = new List<Address>();
+            SqlConnection konekcija = new SqlConnection(@"Data Source=.\sqlexpress;Initial Catalog=AdventureWorks2012;Integrated Security=True");
+            SqlCommand komanda = new SqlCommand("Select * from Person.Address", konekcija);
+            konekcija.Open();
+            using (konekcija)
+            {
+                SqlDataReader reader = komanda.ExecuteReader();
+                adrese = new List<Address>().FromDataReader(reader).ToList();
+            }
+            return adrese;
+        }
+    }
+    public class Reflection
+    {
+        public void FillObjectWithProperty(ref object objectTo, string propertyName, object propertyValue)
+        {
+            Type tOb2 = objectTo.GetType();
+            tOb2.GetProperty(propertyName).SetValue(objectTo, propertyValue == DBNull.Value ? null : propertyValue, null);
+        }
+    }
+    public static class IENumerableExtensions
+    {
+        public static IEnumerable<Address> FromDataReader<Address>(this IEnumerable<Address> list, SqlDataReader dr)
+        {
+            Reflection reflec = new Reflection();
+            Object instance;
+            List<Object> lstObj = new List<Object>();
+            while (dr.Read())
+            {
+                instance = Activator.CreateInstance(list.GetType().GetGenericArguments()[0]);
+                foreach (DataRow drow in dr.GetSchemaTable().Rows)
+                {
+                    reflec.FillObjectWithProperty(ref instance,
+                            drow.ItemArray[0].ToString(), dr[drow.ItemArray[0].ToString()]);
+                }
+                lstObj.Add(instance);
+            }
+            List<Address> lstResult = new List<Address>();
+            foreach (Object item in lstObj)
+            {
+                lstResult.Add((Address)Convert.ChangeType(item, typeof(Address)));
+            }
+            return lstResult;
         }
     }
 }

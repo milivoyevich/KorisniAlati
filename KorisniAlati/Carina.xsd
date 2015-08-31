@@ -1,0 +1,937 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:simpleType name="datum">
+    <xs:restriction base="xs:date" />
+  </xs:simpleType>
+  <xs:complexType name="PartyRelatedInformation">
+    <xs:sequence>
+      <xs:element name="PartyCode" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:integer" />
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="PartyNameAddress">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="60" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="PartyCommunicationNumber" type="xs:string" minOccurs="0" />
+      <xs:element name="PartyContactPerson" type="xs:string" minOccurs="0" />
+      <xs:element name="TypeOfRepresentation" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:length value="1" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element ref="PartyCountry" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Country">
+    <xs:sequence>
+      <xs:element name="CountryName" type="xs:string" minOccurs="0" />
+      <xs:element name="CountryCode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:length value="2" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ModeOfTransport">
+    <xs:restriction base="xs:string">
+      <xs:length value="2" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="MeanOfTransport">
+    <xs:sequence>
+      <xs:element name="RegistrationNo">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="10" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="TrailerNo" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="10" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element ref="Nationality" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CustomsOfficeCode">
+    <xs:sequence>
+      <xs:element name="CustomsOffice" type="xs:string" minOccurs="0" />
+      <xs:element name="CustomsOfficeCoded">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:length value="5" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Header">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Forms" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:short" />
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="GoodsItemNumber">
+          <xs:simpleType>
+            <xs:restriction base="xs:short" />
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="TotalNumberOfPackages" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:integer" />
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="IdentificationOfContainerTransport" type="xs:boolean" minOccurs="0" />
+        <xs:element name="AdditionalDocumentReferenceNumber" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="20" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="TaxPointDate" type="datum" minOccurs="0" />
+        <xs:element name="NatureOfTransactionCoded" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:length value="2" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="LocationOfGoods" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:maxLength value="5" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="ReturnDate" type="xs:dateTime" minOccurs="0" />
+        <xs:element name="DutyTaxPaymentMethod" minOccurs="0">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:length value="1" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="DocumentNameCoded" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DeclarationCoded">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:length value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CustomsProcedureCoded">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:length value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DeclarationTypeCoded" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:length value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RegimeTypeCoded" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PartiesInvolved" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ConsignorExporter" type="PartyRelatedInformation" minOccurs="0" maxOccurs="unbounded" />
+              <xs:element name="ConsigneeImporter" type="PartyRelatedInformation" minOccurs="0" maxOccurs="unbounded" />
+              <xs:element name="DeclarantRepresentativ" type="PartyRelatedInformation" minOccurs="0" maxOccurs="unbounded" />
+              <xs:element name="Principal" type="PartyRelatedInformation" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CountryWhenceConsigned" type="Country" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="CountryOfOrigin" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="DeliveryDestination" type="Country" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="InvoiceData" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CurrencyCode" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:length value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TotalInvoiceAmount" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:decimal" />
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RateOfExchange" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:decimal" />
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="TransportationDetails" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ModeOfTransportAtBorder" type="ModeOfTransport" minOccurs="0" msdata:Ordinal="1" />
+              <xs:element name="ModefTransportInland" type="ModeOfTransport" minOccurs="0" msdata:Ordinal="2" />
+              <xs:element name="PlaceOfLoading" minOccurs="0" msdata:Ordinal="3">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PlasceOfDischarge" minOccurs="0" msdata:Ordinal="4">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="5" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MeansOfTransportAtArrival" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="RegistrationNo" msdata:Ordinal="1">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="10" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="TrailerNo" minOccurs="0" msdata:Ordinal="2">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="10" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element ref="Nationality" minOccurs="0" maxOccurs="unbounded" />
+                  </xs:sequence>
+                  <xs:attribute name="ID" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:int" />
+                    </xs:simpleType>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="MeansOfTransportCrossingBorder" type="MeanOfTransport" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+            <xs:attribute name="IsList" type="xs:boolean" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Incoterms" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IncotermsCode" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:length value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IncotermsPlace" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="IncotermsPlaceCoded" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CustomsOfficeOfEntry-Exit" type="CustomsOfficeCode" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="Guarantee" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TypeOfGuarantee" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:length value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="GuaranteeCode" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="13" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="YearOfIssueance" type="xs:short" minOccurs="0" />
+              <xs:element name="NumberOfGuarantee" type="xs:int" minOccurs="0" />
+              <xs:element ref="ResponsibleCustomsOffice" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CustomsOfficeOfDestination" type="CustomsOfficeCode" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="SecurityDetails" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SecurityType">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="MonetaryAmount" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:decimal" />
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Warehouse" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="WarehouseCoded" type="xs:int" />
+              <xs:element name="WarehouseRefNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="WarehousingDate" type="datum" minOccurs="0" />
+              <xs:element ref="ResponsibleCustomsOffice" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PartyCountry" type="Country" />
+  <xs:element name="CountryOfOrigin" type="Country" />
+  <xs:element name="Nationality" type="Country" />
+  <xs:element name="ResponsibleCustomsOffice" type="CustomsOfficeCode" />
+  <xs:complexType name="ShipingMarks">
+    <xs:sequence>
+      <xs:element name="NumberOfPackages" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:int" />
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="KindAndMarksOfPackages" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="45" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GoodsDescriptionType-Clearence">
+    <xs:sequence>
+      <xs:element name="DescriptionOfGoods">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="250" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="InvoiceLineNumber" type="xs:int" minOccurs="0" />
+      <xs:element name="UNDGnumber" type="xs:short" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Measurements">
+    <xs:sequence>
+      <xs:element name="Measure">
+        <xs:simpleType>
+          <xs:restriction base="xs:decimal" />
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="MeasureUnitCode">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:length value="2" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PreviousCustomsDocumentsTypeClearence">
+    <xs:sequence>
+      <xs:element name="PreviousCustomsDocument" type="PreviousCustomsDocumentTypeClearence" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PreviousCustomsDocumentTypeClearence">
+    <xs:sequence>
+      <xs:element name="PreviousCustomsDocumentCoded" msdata:Ordinal="1">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:length value="2" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="PreviousCustomsDocumentNumber" msdata:Ordinal="2">
+        <xs:simpleType>
+          <xs:restriction base="xs:int" />
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="PreviousCustomsDocumentYear" msdata:Ordinal="3">
+        <xs:simpleType>
+          <xs:restriction base="xs:int" />
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="PreviousCustomsItemDocumentNo" minOccurs="0" msdata:Ordinal="4">
+        <xs:simpleType>
+          <xs:restriction base="xs:short" />
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="GrossWeight" minOccurs="0" msdata:Ordinal="5">
+        <xs:simpleType>
+          <xs:restriction base="xs:decimal" />
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="NumberOfPackages" minOccurs="0" msdata:Ordinal="6">
+        <xs:simpleType>
+          <xs:restriction base="xs:int" />
+        </xs:simpleType>
+      </xs:element>
+      <xs:element ref="ResponsibleCustomsOffice" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="DischargeOfGoods" type="Measurements" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="IDNo" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:element name="GoodsItemData">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TypeOfDutyRegimeCoded" minOccurs="0" msdata:Ordinal="1">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:length value="5" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="CustomsValue" minOccurs="0" msdata:Ordinal="2">
+          <xs:simpleType>
+            <xs:restriction base="xs:decimal" />
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="ValuationMethod" minOccurs="0" msdata:Ordinal="3">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:length value="1" />
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="StatisticalValue" minOccurs="0" msdata:Ordinal="4">
+          <xs:simpleType>
+            <xs:restriction base="xs:decimal" />
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="ValuationAdjustment" minOccurs="0" msdata:Ordinal="5">
+          <xs:simpleType>
+            <xs:restriction base="xs:decimal" />
+          </xs:simpleType>
+        </xs:element>
+        <xs:element name="GoodsItemPackaging" type="ShipingMarks" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="GoodsDescription" type="GoodsDescriptionType-Clearence" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="CustomsItem" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TariffCodeNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:length value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="AditionalCodeNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:length value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="TariffQuantity" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="MeasureUnitCode" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:length value="2" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="SupplementaryQuantity" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:decimal" />
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="TariffRegime" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="TariffRegimeCode" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="2" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="PurposeOfImport" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:length value="2" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="PreferentialRegime" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="TaxPreferentialRegimeCode" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="4" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="AccisePreferentialRegimeCode" minOccurs="0">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="4" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element ref="CountryOfOrigin" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="GoodsItemMeasurements" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GrossWeight" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:decimal" />
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NetNetWeight" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:decimal" />
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Cube" type="Measurements" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CustomsProcedure" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="CustomsProcedureCoded">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="PreviousCustomsProcedureCoded" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="NationalProcedureCoded" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CustomsAutorizationDocument" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DocumentNumber" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:int" />
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DocumentYear" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:short" />
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PreviousCustomsDocuments" type="PreviousCustomsDocumentsTypeClearence" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="Manufacturer" type="PartyRelatedInformation" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="AdditionalDocumentInformation" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AdditionalDocument" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Type" msdata:Ordinal="2">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:length value="3" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="DocumentIDNumber" minOccurs="0" msdata:Ordinal="3">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:int" />
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="Date" type="datum" minOccurs="0" msdata:Ordinal="4" />
+                    <xs:element name="PartyCode" minOccurs="0" msdata:Ordinal="5">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:integer" />
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="DeclarationType" minOccurs="0" msdata:Ordinal="6">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:length value="2" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="Year" minOccurs="0" msdata:Ordinal="7">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:short" />
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="TypeOfDutyRegimeCoded" minOccurs="0" msdata:Ordinal="8">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:length value="5" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="AdditionalInformation" minOccurs="0" msdata:Ordinal="9">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="30" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="FinalProductNumber" minOccurs="0" msdata:Ordinal="10">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:short" />
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="IssuerCode" type="CustomsOfficeCode" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="Country" type="Country" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="FinancialDetails" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="CurrencyCode" minOccurs="0">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:length value="3" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                          <xs:element name="MonetaryAmount">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:decimal" />
+                            </xs:simpleType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="IDNo" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:int" />
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="ReferrallIndicator" type="xs:boolean" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="DutyTaxFeeInformation" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DutyTaxFeeDetails" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="DutyTaxFeeType" msdata:Ordinal="1">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:length value="2" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="DutyTaxFeeBase" minOccurs="0" msdata:Ordinal="2">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:decimal" />
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="DutyTaxFeeRate" minOccurs="0" msdata:Ordinal="3">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:decimal" />
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="DutyTypeFeeAmount" minOccurs="0" msdata:Ordinal="4">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:decimal" />
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="GroupDutyCode" minOccurs="0" msdata:Ordinal="5">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="4" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="IDNo" type="xs:int" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="total" type="xs:decimal" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="GoodsItemNumber" use="required">
+        <xs:simpleType>
+          <xs:restriction base="xs:int" />
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="SADType">
+    <xs:sequence>
+      <xs:element ref="Header" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element ref="GoodsItemData" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+    <xs:attribute name="CustomsOfficeOfDeclarationCode" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:length value="5" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="DocumentNumber" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="20" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="VersionNumber" type="xs:int" default="0" />
+    <xs:attribute name="OperationCode" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string" />
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="ActionControlCode" use="required">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:maxLength value="2" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="DateOfArrivalAtFirstCustomsPort" type="datum" use="required" />
+  </xs:complexType>
+  <xs:element name="Body">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="MessageHeader" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GoodsDeclarationSubmissionDate" type="xs:dateTime" />
+              <xs:element name="ResponsibleParty" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ResponsiblePartyCode">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:integer" />
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="ResponsiblePartyNameAdress">
+                      <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                          <xs:maxLength value="60" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="ResponsiblePartyCommunicationNumber" type="xs:string" minOccurs="0" />
+                    <xs:element name="ResponsiblePartyCommunicationPerson" type="xs:string" minOccurs="0" />
+                    <xs:element name="ResponsiblePartyCountry" type="Country" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="ResponsiblePartyAgent" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="AgentName" type="xs:string" />
+                          <xs:element name="AgentCode">
+                            <xs:simpleType>
+                              <xs:restriction base="xs:string">
+                                <xs:maxLength value="5" />
+                              </xs:restriction>
+                            </xs:simpleType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="MessageFunction" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="SAD" type="SADType" minOccurs="0" maxOccurs="unbounded" />
+              <xs:element name="SummDec" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element ref="Header" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element ref="GoodsItemData" minOccurs="0" maxOccurs="unbounded" />
+                  </xs:sequence>
+                  <xs:attribute name="CustomsOfficeOfDeclarationCode" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:length value="5" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="DateOfArrivalAtFirstCustomsPort" type="datum" use="required" />
+                  <xs:attribute name="DocumentNumber" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="VersionNumber" type="xs:int" default="0" />
+                  <xs:attribute name="OperationCode" type="xs:string" use="required" />
+                  <xs:attribute name="ActionControlCode" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:length value="2" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="SADTransit" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element ref="Header" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element ref="GoodsItemData" minOccurs="0" maxOccurs="unbounded" />
+                  </xs:sequence>
+                  <xs:attribute name="CustomsOfficeOfDeclarationCode" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:length value="5" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="DateOfArrivalAtFirstCustomsPort" type="datum" use="required" />
+                  <xs:attribute name="DocumentNumber" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:maxLength value="20" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="VersionNumber" type="xs:int" default="0" />
+                  <xs:attribute name="OperationCode" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string" />
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="ActionControlCode" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:length value="2" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="ShipmentList" type="xs:boolean" default="false" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CusDecMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Header" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="Body" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CusResMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Header" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element ref="Body" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="Header" />
+        <xs:element ref="PartyCountry" />
+        <xs:element ref="CountryOfOrigin" />
+        <xs:element ref="Nationality" />
+        <xs:element ref="ResponsibleCustomsOffice" />
+        <xs:element ref="GoodsItemData" />
+        <xs:element ref="Body" />
+        <xs:element ref="CusDecMessage" />
+        <xs:element ref="CusResMessage" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
