@@ -1,9 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KorisniAlati", "KorisniAlati\KorisniAlati.csproj", "{FF54BB02-ED78-48B8-96E8-1A0496477CF6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DB43044A-2056-44EB-AAAE-1E4EE4C35BE1}"
+	ProjectSection(SolutionItems) = preProject
+		KorisniAlati\fReports.Designer.cs = KorisniAlati\fReports.Designer.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

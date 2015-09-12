@@ -373,9 +373,14 @@ namespace KorisniAlati
                 foreach(DataTable tabla in ds.Tables)
                 {
                     richTextBox2.AppendText("\n\n"+tabla.TableName + "\n");
-                    foreach(DataColumn kolona in tabla.Columns)
+                    foreach (DataRelation r in tabla.ChildRelations)
                     {
-                        richTextBox2.AppendText(AliasType(kolona.DataType.Name) + ", ");
+                        richTextBox2.AppendText(r.RelationName + "/" + r.ParentTable.TableName + "/" + r.ChildTable.TableName + "\n");
+                        }
+                    foreach (DataColumn kolona in tabla.Columns)
+                    {
+                        richTextBox2.AppendText(AliasType(kolona.DataType.Name) + 
+                            ((kolona.MaxLength>-1)?"(" + kolona.MaxLength.ToString() + ")":"")+", ");
                     }
                 }
             }
@@ -384,7 +389,7 @@ namespace KorisniAlati
         
         private void linqToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            fLinq forma = new fLinq();
+            fReports forma = new fReports();
             forma.ShowDialog();
         }
 		private string AliasType(string tip)

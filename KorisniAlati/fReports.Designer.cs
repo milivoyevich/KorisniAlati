@@ -1,6 +1,6 @@
 ﻿namespace KorisniAlati
 {
-    partial class fLinq
+    partial class fReports
     {
         /// <summary>
         /// Required designer variable.
@@ -30,15 +30,25 @@
         {
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fLinq));
-            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.AdventureWorks2012DataSet = new KorisniAlati.AdventureWorks2012DataSet();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fReports));
             this.PersonBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.AdventureWorks2012DataSet = new KorisniAlati.AdventureWorks2012DataSet();
+            this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
             this.PersonTableAdapter = new KorisniAlati.AdventureWorks2012DataSetTableAdapters.PersonTableAdapter();
             this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.AdventureWorks2012DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PersonBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AdventureWorks2012DataSet)).BeginInit();
             this.SuspendLayout();
+            // 
+            // PersonBindingSource
+            // 
+            this.PersonBindingSource.DataMember = "Person";
+            this.PersonBindingSource.DataSource = this.AdventureWorks2012DataSet;
+            // 
+            // AdventureWorks2012DataSet
+            // 
+            this.AdventureWorks2012DataSet.DataSetName = "AdventureWorks2012DataSet";
+            this.AdventureWorks2012DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // reportViewer1
             // 
@@ -51,16 +61,6 @@
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.Size = new System.Drawing.Size(519, 379);
             this.reportViewer1.TabIndex = 0;
-            // 
-            // AdventureWorks2012DataSet
-            // 
-            this.AdventureWorks2012DataSet.DataSetName = "AdventureWorks2012DataSet";
-            this.AdventureWorks2012DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // PersonBindingSource
-            // 
-            this.PersonBindingSource.DataMember = "Person";
-            this.PersonBindingSource.DataSource = this.AdventureWorks2012DataSet;
             // 
             // PersonTableAdapter
             // 
@@ -76,7 +76,7 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // fLinq
+            // fReports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -88,12 +88,12 @@
             this.ForeColor = System.Drawing.Color.SaddleBrown;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Name = "fLinq";
+            this.Name = "fReports";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "fLinq";
             this.Load += new System.EventHandler(this.fLinq_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.AdventureWorks2012DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PersonBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AdventureWorks2012DataSet)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -126,17 +126,18 @@
     </Compile>
     <Compile Include="ExcelImport.cs" />
     <Compile Include="exportToExcel.cs" />
-    <Compile Include="fLinq.cs">
+    <None Include="ClassDiagram1.cd" />
+    <Compile Include="fReports.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="fLinq.Designer.cs">
-      <DependentUpon>fLinq.cs</DependentUpon>
     </Compile>
     <Compile Include="fGlavna.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="fGlavna.Designer.cs">
       <DependentUpon>fGlavna.cs</DependentUpon>
+    </Compile>
+    <Compile Include="fReports.Designer.cs">
+      <DependentUpon>fReports.cs</DependentUpon>
     </Compile>
     <Compile Include="LOcalcAuto.cs" />
     <Compile Include="modeli\CusDecDtoModel.cs" />
@@ -145,11 +146,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StaticKlasa.cs" />
-    <EmbeddedResource Include="fLinq.resx">
-      <DependentUpon>fLinq.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="fGlavna.resx">
       <DependentUpon>fGlavna.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fReports.resx">
+      <DependentUpon>fReports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

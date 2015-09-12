@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace KorisniAlati
 {
-    public partial class fLinq : Form
+    public partial class fReports : Form
     {
-        public fLinq()
+        public fReports()
         {
             InitializeComponent();
         }
