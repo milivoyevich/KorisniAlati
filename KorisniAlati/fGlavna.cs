@@ -29,7 +29,9 @@ namespace KorisniAlati
         {
             InitializeComponent();
         }
-        string initKonekt = @"Data Source=.\sqlexpress; Initial Catalog=AdventureWorks2012;User ID=sa; Password=vdm191100";
+        
+        string initKonekt = @"Data Source=MILIVOYEVICH-PC; Initial Catalog=AdventureWorks2012;User ID=sa; Password=vdm191100";
+        //string initKonekt = @"Data Source=.\sqlexpress; Initial Catalog=AdventureWorks2012;User ID=sa; Password=vdm191100";
         SqlConnection konekcija = new SqlConnection();
         SqlCommand komanda=new SqlCommand(@"SELECT * FROM information_schema.tables where TABLE_TYPE='BASE TABLE'");
         SqlDataAdapter adapter = new SqlDataAdapter();
@@ -39,6 +41,10 @@ namespace KorisniAlati
         {
             txtKonekcija.Text = initKonekt;
             dgExcel.DataSource = StaticKlasa.Tpersona;
+            string unoPath=@"C:\Program Files (x86)\LibreOffice 5\program";
+            Environment.SetEnvironmentVariable("UNO_PATH", unoPath, EnvironmentVariableTarget.Process); 
+            Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + @";" 
+                                               + unoPath, EnvironmentVariableTarget.Process);
         }
 
         private void btnKonekt_Click(object sender, EventArgs e)

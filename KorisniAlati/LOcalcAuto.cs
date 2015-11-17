@@ -67,7 +67,8 @@ namespace KorisniAlati
         public List<Address> PersonaL()
         {
             List<Address> adrese = new List<Address>();
-            SqlConnection konekcija = new SqlConnection(@"Data Source=.\sqlexpress;Initial Catalog=AdventureWorks2012;Integrated Security=True");
+            SqlConnection konekcija = new SqlConnection( @"Data Source=MILIVOYEVICH-PC; Initial Catalog=AdventureWorks2012;User ID=sa; Password=vdm191100");
+            //SqlConnection konekcija = new SqlConnection(@"Data Source=.\sqlexpress;Initial Catalog=AdventureWorks2012;Integrated Security=True");
             SqlCommand komanda = new SqlCommand("Select * from Person.Address", konekcija);
             konekcija.Open();
             using (konekcija)
