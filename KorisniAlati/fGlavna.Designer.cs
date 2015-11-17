@@ -53,12 +53,12 @@
             this.btnExcel = new System.Windows.Forms.Button();
             this.dgExcel = new System.Windows.Forms.DataGrid();
             this.tpBind = new System.Windows.Forms.TabPage();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.btnBind = new System.Windows.Forms.Button();
             this.dataGrid1 = new System.Windows.Forms.DataGrid();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.linqToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tabControl1.SuspendLayout();
             this.tpPOCO.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -125,7 +125,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(579, 413);
+            this.tabControl1.Size = new System.Drawing.Size(587, 413);
             this.tabControl1.TabIndex = 5;
             // 
             // tpPOCO
@@ -140,7 +140,7 @@
             this.tpPOCO.Location = new System.Drawing.Point(4, 22);
             this.tpPOCO.Name = "tpPOCO";
             this.tpPOCO.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPOCO.Size = new System.Drawing.Size(571, 387);
+            this.tpPOCO.Size = new System.Drawing.Size(579, 387);
             this.tpPOCO.TabIndex = 0;
             this.tpPOCO.Text = "POCO - LOKO";
             // 
@@ -336,6 +336,16 @@
             this.tpBind.TabIndex = 3;
             this.tpBind.Text = "Binding";
             // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.richTextBox2.Location = new System.Drawing.Point(24, 23);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(193, 339);
+            this.richTextBox2.TabIndex = 2;
+            this.richTextBox2.Text = "";
+            // 
             // btnBind
             // 
             this.btnBind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -373,7 +383,7 @@
             this.linqToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(579, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(587, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -384,21 +394,11 @@
             this.linqToolStripMenuItem.Text = "Reports";
             this.linqToolStripMenuItem.Click += new System.EventHandler(this.linqToolStripMenuItem_Click);
             // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.richTextBox2.Location = new System.Drawing.Point(24, 23);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(193, 339);
-            this.richTextBox2.TabIndex = 2;
-            this.richTextBox2.Text = "";
-            // 
             // fGlavna
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(579, 437);
+            this.ClientSize = new System.Drawing.Size(587, 437);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
