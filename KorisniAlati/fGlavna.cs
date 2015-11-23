@@ -20,11 +20,15 @@ using unoidl.com.sun.star.table;
 using unoidl.com.sun.star.text;
 using unoidl.com.sun.star.uno;
 using unoidl.com.sun.star.accessibility;
+using System.Text.RegularExpressions;
 
 namespace KorisniAlati
 {
     public partial class fGlavna : Form
     {
+        #region chlanovi
+        string RegexString=null;
+        #endregion
         public fGlavna()
         {
             InitializeComponent();
@@ -40,7 +44,8 @@ namespace KorisniAlati
         private void Form1_Load(object sender, EventArgs e)
         {
             txtKonekcija.Text = initKonekt;
-            dgExcel.DataSource = StaticKlasa.Tpersona;
+            try { dgExcel.DataSource = StaticKlasa.Tpersona; }
+             catch(System.Exception ex)   { MessageBox.Show(ex.Message); }
             string unoPath=@"C:\Program Files (x86)\LibreOffice 5\program";
             Environment.SetEnvironmentVariable("UNO_PATH", unoPath, EnvironmentVariableTarget.Process); 
             Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + @";" 
@@ -398,7 +403,8 @@ namespace KorisniAlati
             fReports forma = new fReports();
             forma.ShowDialog();
         }
-		private string AliasType(string tip)
+
+        private string AliasType(string tip)
         {
            string novTip = tip;
             switch (tip)
@@ -421,6 +427,55 @@ namespace KorisniAlati
             }
             return novTip;
         }
-		
+            
+        #region Regex
+        private void setRegex(int uslov)
+        {
+              switch(uslov)
+            {
+                case 0: RegexString = @"\d+"; break;
+                case 1: RegexString = @"\w+"; break;
+                case 2:
+                    if (string.IsNullOrEmpty(txtCustomReg.Text)) RegexString = @"[\p{IsCyrillic}\s]+";
+                    else RegexString = txtCustomReg.Text;
+                    break;
+            }       
+        }
+
+        private void rbSlova_CheckedChanged(object sender, EventArgs e)
+        {
+          if(rbSlova.Checked)  setRegex(1);
+        }
+
+        private void rbRazno_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbRazno.Checked)
+            {
+                setRegex(2);
+                txtCustomReg.Enabled = true;
+            }
+            else
+            {
+                txtCustomReg.Enabled = false;
+            }
+        }
+
+        private void txtCustomReg_Leave(object sender, EventArgs e)
+        {
+            setRegex(2);
+        }
+
+        private void rbBrojevi_CheckedChanged(object sender, EventArgs e)
+        {
+          if(rbBrojevi.Checked)  setRegex(0);
+        }
+        private void txtDecimal_TextChanged(object sender, EventArgs e)
+        {
+           if(!string.IsNullOrEmpty(RegexString))
+                txtDecimal.Text = Regex.Match(txtDecimal.Text, RegexString).Value;
+           if(txtDecimal.Text.Length>0) txtDecimal.Select(txtDecimal.Text.Length, 0);
+        }
+        #endregion
+
     }
 }

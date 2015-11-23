@@ -59,6 +59,14 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.linqToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tpRegex = new System.Windows.Forms.TabPage();
+            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.txtDecimal = new System.Windows.Forms.TextBox();
+            this.gbRegex = new System.Windows.Forms.GroupBox();
+            this.rbBrojevi = new System.Windows.Forms.RadioButton();
+            this.rbSlova = new System.Windows.Forms.RadioButton();
+            this.rbRazno = new System.Windows.Forms.RadioButton();
+            this.txtCustomReg = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tpPOCO.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -68,6 +76,8 @@
             this.tpBind.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            this.tpRegex.SuspendLayout();
+            this.gbRegex.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtKonekcija
@@ -121,11 +131,12 @@
             this.tabControl1.Controls.Add(this.tpXML);
             this.tabControl1.Controls.Add(this.tpExcel);
             this.tabControl1.Controls.Add(this.tpBind);
+            this.tabControl1.Controls.Add(this.tpRegex);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(587, 413);
+            this.tabControl1.Size = new System.Drawing.Size(605, 413);
             this.tabControl1.TabIndex = 5;
             // 
             // tpPOCO
@@ -140,7 +151,7 @@
             this.tpPOCO.Location = new System.Drawing.Point(4, 22);
             this.tpPOCO.Name = "tpPOCO";
             this.tpPOCO.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPOCO.Size = new System.Drawing.Size(579, 387);
+            this.tpPOCO.Size = new System.Drawing.Size(597, 387);
             this.tpPOCO.TabIndex = 0;
             this.tpPOCO.Text = "POCO - LOKO";
             // 
@@ -200,7 +211,7 @@
             this.tpXML.Location = new System.Drawing.Point(4, 22);
             this.tpXML.Name = "tpXML";
             this.tpXML.Padding = new System.Windows.Forms.Padding(3);
-            this.tpXML.Size = new System.Drawing.Size(571, 387);
+            this.tpXML.Size = new System.Drawing.Size(597, 387);
             this.tpXML.TabIndex = 1;
             this.tpXML.Text = "toXML";
             // 
@@ -262,7 +273,7 @@
             this.tpExcel.Controls.Add(this.dgExcel);
             this.tpExcel.Location = new System.Drawing.Point(4, 22);
             this.tpExcel.Name = "tpExcel";
-            this.tpExcel.Size = new System.Drawing.Size(571, 387);
+            this.tpExcel.Size = new System.Drawing.Size(597, 387);
             this.tpExcel.TabIndex = 2;
             this.tpExcel.Text = "Import to Excel";
             // 
@@ -332,7 +343,7 @@
             this.tpBind.Controls.Add(this.dataGrid1);
             this.tpBind.Location = new System.Drawing.Point(4, 22);
             this.tpBind.Name = "tpBind";
-            this.tpBind.Size = new System.Drawing.Size(571, 387);
+            this.tpBind.Size = new System.Drawing.Size(597, 387);
             this.tpBind.TabIndex = 3;
             this.tpBind.Text = "Binding";
             // 
@@ -383,7 +394,7 @@
             this.linqToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(587, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(605, 24);
             this.menuStrip1.TabIndex = 6;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -394,11 +405,99 @@
             this.linqToolStripMenuItem.Text = "Reports";
             this.linqToolStripMenuItem.Click += new System.EventHandler(this.linqToolStripMenuItem_Click);
             // 
+            // tpRegex
+            // 
+            this.tpRegex.BackColor = System.Drawing.Color.Khaki;
+            this.tpRegex.Controls.Add(this.gbRegex);
+            this.tpRegex.Controls.Add(this.txtDecimal);
+            this.tpRegex.Controls.Add(this.maskedTextBox1);
+            this.tpRegex.Location = new System.Drawing.Point(4, 22);
+            this.tpRegex.Name = "tpRegex";
+            this.tpRegex.Padding = new System.Windows.Forms.Padding(3);
+            this.tpRegex.Size = new System.Drawing.Size(597, 387);
+            this.tpRegex.TabIndex = 4;
+            this.tpRegex.Text = "Regex";
+            // 
+            // maskedTextBox1
+            // 
+            this.maskedTextBox1.Location = new System.Drawing.Point(28, 26);
+            this.maskedTextBox1.Mask = "(999) 000-0000";
+            this.maskedTextBox1.Name = "maskedTextBox1";
+            this.maskedTextBox1.Size = new System.Drawing.Size(88, 21);
+            this.maskedTextBox1.TabIndex = 0;
+            // 
+            // txtDecimal
+            // 
+            this.txtDecimal.Location = new System.Drawing.Point(184, 26);
+            this.txtDecimal.Name = "txtDecimal";
+            this.txtDecimal.Size = new System.Drawing.Size(168, 21);
+            this.txtDecimal.TabIndex = 1;
+            this.txtDecimal.TextChanged += new System.EventHandler(this.txtDecimal_TextChanged);
+            // 
+            // gbRegex
+            // 
+            this.gbRegex.BackColor = System.Drawing.Color.LemonChiffon;
+            this.gbRegex.Controls.Add(this.txtCustomReg);
+            this.gbRegex.Controls.Add(this.rbRazno);
+            this.gbRegex.Controls.Add(this.rbSlova);
+            this.gbRegex.Controls.Add(this.rbBrojevi);
+            this.gbRegex.Location = new System.Drawing.Point(416, 22);
+            this.gbRegex.Name = "gbRegex";
+            this.gbRegex.Size = new System.Drawing.Size(151, 216);
+            this.gbRegex.TabIndex = 2;
+            this.gbRegex.TabStop = false;
+            this.gbRegex.Text = "Ограничавање уноса";
+            // 
+            // rbBrojevi
+            // 
+            this.rbBrojevi.AutoSize = true;
+            this.rbBrojevi.Checked = true;
+            this.rbBrojevi.Location = new System.Drawing.Point(15, 32);
+            this.rbBrojevi.Name = "rbBrojevi";
+            this.rbBrojevi.Size = new System.Drawing.Size(64, 17);
+            this.rbBrojevi.TabIndex = 0;
+            this.rbBrojevi.TabStop = true;
+            this.rbBrojevi.Text = "Бројеви";
+            this.rbBrojevi.UseVisualStyleBackColor = true;
+            this.rbBrojevi.CheckedChanged += new System.EventHandler(this.rbBrojevi_CheckedChanged);
+            // 
+            // rbSlova
+            // 
+            this.rbSlova.AutoSize = true;
+            this.rbSlova.Location = new System.Drawing.Point(15, 55);
+            this.rbSlova.Name = "rbSlova";
+            this.rbSlova.Size = new System.Drawing.Size(56, 17);
+            this.rbSlova.TabIndex = 1;
+            this.rbSlova.Text = "Слова";
+            this.rbSlova.UseVisualStyleBackColor = true;
+            this.rbSlova.CheckedChanged += new System.EventHandler(this.rbSlova_CheckedChanged);
+            // 
+            // rbRazno
+            // 
+            this.rbRazno.AutoSize = true;
+            this.rbRazno.Location = new System.Drawing.Point(15, 140);
+            this.rbRazno.Name = "rbRazno";
+            this.rbRazno.Size = new System.Drawing.Size(54, 17);
+            this.rbRazno.TabIndex = 2;
+            this.rbRazno.Text = "Разно";
+            this.rbRazno.UseVisualStyleBackColor = true;
+            this.rbRazno.CheckedChanged += new System.EventHandler(this.rbRazno_CheckedChanged);
+            // 
+            // txtCustomReg
+            // 
+            this.txtCustomReg.Enabled = false;
+            this.txtCustomReg.Location = new System.Drawing.Point(15, 163);
+            this.txtCustomReg.Multiline = true;
+            this.txtCustomReg.Name = "txtCustomReg";
+            this.txtCustomReg.Size = new System.Drawing.Size(119, 36);
+            this.txtCustomReg.TabIndex = 3;
+            this.txtCustomReg.Leave += new System.EventHandler(this.txtCustomReg_Leave);
+            // 
             // fGlavna
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(587, 437);
+            this.ClientSize = new System.Drawing.Size(605, 437);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -419,6 +518,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tpRegex.ResumeLayout(false);
+            this.tpRegex.PerformLayout();
+            this.gbRegex.ResumeLayout(false);
+            this.gbRegex.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -456,6 +559,14 @@
         private System.Windows.Forms.Button btnDodeli;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.TabPage tpRegex;
+        private System.Windows.Forms.TextBox txtDecimal;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.GroupBox gbRegex;
+        private System.Windows.Forms.RadioButton rbRazno;
+        private System.Windows.Forms.RadioButton rbSlova;
+        private System.Windows.Forms.RadioButton rbBrojevi;
+        private System.Windows.Forms.TextBox txtCustomReg;
     }
 }
 
