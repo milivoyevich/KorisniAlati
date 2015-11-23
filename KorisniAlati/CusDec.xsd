@@ -1,0 +1,2622 @@
+<?xml version="1.0"?>
+<!-- edited with XMLSpy v2008 rel. 2 sp2 (http://www.altova.com) by Ivana Bulic (UC) -->
+<!-- edited with XML Spy v4.2 U (http://www.xmlspy.com) by UC (UC) -->
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by zare (carina) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:complexType name="Country">
+		<xsd:sequence>
+			<xsd:element name="CountryName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="CountryCode">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="2"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="MeanOfTransport">
+		<xsd:sequence>
+			<xsd:element name="RegistrationNo">
+				<xsd:annotation>
+					<xsd:documentation>Identifikacija prevoznog sredstva - rubrika 18, prva podpodela</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="10"/>
+						<xsd:minLength value="1"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="TrailerNo" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Registracija prikolice</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="10"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="Nationality" type="Country" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Nacionalnost prevoznog sredstva</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="ModeOfTransport">
+		<xsd:restriction base="xsd:string">
+			<xsd:length value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="CustomsOfficeCode">
+		<xsd:sequence>
+			<xsd:element name="CustomsOffice" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Naziv carinske ispostave</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="CustomsOfficeCoded">
+				<xsd:annotation>
+					<xsd:documentation>Sifra carinske ispostave</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="5"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Measurements">
+		<xsd:sequence>
+			<xsd:element name="Measure">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:totalDigits value="15"/>
+						<xsd:fractionDigits value="2"/>
+						<xsd:minInclusive value="0"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="MeasureUnitCode">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="2"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="SAD" type="SADType"/>
+	<xsd:complexType name="PartyRelatedInformation">
+		<xsd:sequence>
+			<xsd:element name="PartyCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>PIB</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:integer">
+						<xsd:minInclusive value="000000001"/>
+						<xsd:maxInclusive value="9999999999999"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PartyNameAddress">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="60"/>
+						<xsd:minLength value="5"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PartyCountry" type="Country" minOccurs="0"/>
+			<xsd:element name="PartyCommunicationNumber" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="PartyContactPerson" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="TypeOfRepresentation" minOccurs="0">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="1"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="CusDecMessage">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Header" type="HeaderType"/>
+				<xsd:element name="Body">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="MessageHeader">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="ResponsibleParty">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="ResponsiblePartyCode">
+														<xsd:annotation>
+															<xsd:documentation>Pib Podnosioca (Rubrika 54)</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:integer">
+																<xsd:maxInclusive value="999999999"/>
+																<xsd:minInclusive value="000000001"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="ResponsiblePartyNameAdress">
+														<xsd:annotation>
+															<xsd:documentation>Ime/Adresa Podnosioca (Rubrika 54)</xsd:documentation>
+														</xsd:annotation>
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="60"/>
+																<xsd:minLength value="5"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="ResponsiblePartyCountry" type="Country" minOccurs="0"/>
+													<xsd:element name="ResponsiblePartyCommunicationNumber" type="xsd:string" minOccurs="0"/>
+													<xsd:element name="ResponsiblePartyCommunicationPerson" type="xsd:string" minOccurs="0"/>
+													<xsd:element name="ResponsiblePartyAgent">
+														<xsd:complexType>
+															<xsd:sequence>
+																<xsd:element name="AgentName" type="xsd:string"/>
+																<xsd:element name="AgentCode">
+																	<xsd:simpleType>
+																		<xsd:restriction base="xsd:string">
+																			<xsd:maxLength value="5"/>
+																			<xsd:minLength value="5"/>
+																		</xsd:restriction>
+																	</xsd:simpleType>
+																</xsd:element>
+															</xsd:sequence>
+														</xsd:complexType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="GoodsDeclarationSubmissionDate" type="xsd:dateTime"/>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="MessageFunction" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:choice>
+										<xsd:element name="SAD">
+											<xsd:complexType>
+												<xsd:complexContent>
+													<xsd:extension base="SADType"/>
+												</xsd:complexContent>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="SummDec">
+											<xsd:complexType>
+												<xsd:complexContent>
+													<xsd:extension base="SummDecType"/>
+												</xsd:complexContent>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="SADTransit">
+											<xsd:complexType>
+												<xsd:complexContent>
+													<xsd:extension base="SadTransitType"/>
+												</xsd:complexContent>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:choice>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="ShipingMarks">
+		<xsd:sequence>
+			<xsd:element name="NumberOfPackages" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Broj koleta</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="KindAndMarksOfPackages" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Vrsta i oznaka koleta</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="45"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GoodsDescriptionType-Clearence">
+		<xsd:sequence>
+			<xsd:element name="DescriptionOfGoods">
+				<xsd:annotation>
+					<xsd:documentation>Trgovacki naziv/Opis robe</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="250"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="InvoiceLineNumber" type="xsd:int" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Za sada se ne popunjava</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="UNDGnumber" type="xsd:short" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>DangerousGoodsCode - Sifarnik UN</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="GoodsDescriptionType-Transit">
+		<xsd:sequence>
+			<xsd:element name="DescriptionOfGoods">
+				<xsd:annotation>
+					<xsd:documentation>Trgovacki naziv/Opis robe</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="90"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="InvoiceLineNumber" type="xsd:int" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Za sada se ne popunjava</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="UNDGnumber" type="xsd:short" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Dangerous goods code-Sifarnik UN</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PreviusCustomsDocumentsTypeTransit">
+		<xsd:sequence>
+			<xsd:element name="PreviousCustomsDocument" type="PreviousCustomsDocumentTypeTransit" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SADType">
+		<xsd:sequence>
+			<xsd:element name="Header">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="DocumentNameCoded">
+							<xsd:annotation>
+								<xsd:documentation>Deklaracija - rubrika 1</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="DeclarationCoded">
+										<xsd:annotation>
+											<xsd:documentation>I potpodela</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:length value="2"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="CustomsProcedureCoded">
+										<xsd:annotation>
+											<xsd:documentation>II potpodela</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:length value="1"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="DeclarationTypeCoded" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>III potpodela - vrsta deklaracije (NP - nepotpuna,...) - TRANZIT(Dekl)</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:length value="2"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="RegimeTypeCoded" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>IV potpodela - Vrsta evidencije (CG - promet sa Crnom Gorom)</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:minLength value="0"/>
+												<xsd:maxLength value="2"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="PartiesInvolved" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="ConsignorExporter" type="PartyRelatedInformation" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Posiljalac - izvoznik - rubrika 2</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="ConsigneeImporter" type="PartyRelatedInformation" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Primalac - rubrika 8</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="DeclarantRepresentativ" type="PartyRelatedInformation" maxOccurs="2">
+										<xsd:annotation>
+											<xsd:documentation>Deklarant - zastupnik - rubrika 14</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="Principal" type="PartyRelatedInformation" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Glavni obveznik - rubrika 50 - popunjava se samo ako je izvoz+tranzit</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="Forms" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Obrasci - ukupan broj obrazaca - rubrika 3</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:short">
+									<xsd:minInclusive value="1"/>
+									<xsd:maxInclusive value="334"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="GoodsItemNumber">
+							<xsd:annotation>
+								<xsd:documentation>Ukupan broj naimenovanja  - rubrika 5</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:short">
+									<xsd:minInclusive value="1"/>
+									<xsd:maxInclusive value="999"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="TotalNumberOfPackages" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Ukupan broj koleta -   rubrika 6</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:integer">
+									<xsd:minInclusive value="0"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="CountryWhenceConsigned" type="Country" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Zemlja otpreme</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="CountryOfOrigin" type="Country" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Zemlja porekla</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="DeliveryDestination" type="Country" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Zemlja odredista</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="IdentificationOfContainerTransport" type="xsd:boolean" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Kontejner - rubrika 19</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="InvoiceData" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Rubrike 22 i 23</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="CurrencyCode" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Sifra valute</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:length value="3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="TotalInvoiceAmount" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Ukupan iznos fakture</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:decimal">
+												<xsd:totalDigits value="15"/>
+												<xsd:fractionDigits value="2"/>
+												<xsd:minInclusive value="0"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="RateOfExchange" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Kurs valute</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:decimal">
+												<xsd:totalDigits value="15"/>
+												<xsd:fractionDigits value="6"/>
+												<xsd:minInclusive value="0"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="AdditionalDocumentReferenceNumber" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Referentni broj - rubrika 7</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:minLength value="0"/>
+									<xsd:maxLength value="20"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="TaxPointDate" type="datum" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Datum primene propisa - rubrika 7 II potpodela</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="TransportationDetails" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="MeansOfTransportAtArrival" minOccurs="0" maxOccurs="999">
+										<xsd:annotation>
+											<xsd:documentation>Identifikacija i nacionalnost prevoznog sredstva u odlasku/prispecu</xsd:documentation>
+										</xsd:annotation>
+										<xsd:complexType>
+											<xsd:complexContent>
+												<xsd:extension base="MeanOfTransport">
+													<xsd:attribute name="ID" use="required">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:int">
+																<xsd:minInclusive value="0"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:attribute>
+												</xsd:extension>
+											</xsd:complexContent>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="MeansOfTransportCrossingBorder" type="MeanOfTransport" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Rubrika 21 - za sada se ne popunjava</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="ModeOfTransportAtBorder" type="ModeOfTransport" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Rubrika 25 - Vrsta saobracaja na granici</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="ModefTransportInland" type="ModeOfTransport" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Rubrika 26 - Unutrasnja vrsta saobracaja - za sada se ne popunjava</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="PlaceOfLoading" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Mesto utovara - rubrika 27 - za sada se ne popunjava</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:minLength value="0"/>
+												<xsd:maxLength value="5"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="PlasceOfDischarge" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Mesto  istovara - rubrika 27 - za sada se ne popunjava</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:minLength value="0"/>
+												<xsd:maxLength value="5"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+								</xsd:sequence>
+								<xsd:attribute name="IsList" type="xsd:boolean" use="required"/>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="Incoterms" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Uslovi isporuke - rubrika 20</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="IncotermsCode" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Sifra uslova isporuke</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:length value="3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="IncotermsPlace" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Mesto isporuke</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:minLength value="0"/>
+												<xsd:maxLength value="20"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="IncotermsPlaceCoded" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Sifra mesta isporuke</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:minLength value="0"/>
+												<xsd:maxLength value="2"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="NatureOfTransactionCoded" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Vrsta spoljnotrgovinskog posla - rubrika 24 - I i II potpodela se upisuju spojeno</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:length value="2"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="CustomsOfficeOfEntry-Exit" type="CustomsOfficeCode" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Carinska ispostava ulaza/istupa - rubrika 29</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="Guarantee" minOccurs="0" maxOccurs="2">
+							<xsd:annotation>
+								<xsd:documentation>Odlozeno placanje - rubrika 48 i, u izvoz+tranzit, Garancija koja ne vazi za - rubrika 52</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="TypeOfGuarantee" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>vrsta garancije - popunjava se ako se ovo polje odnosi na rubriku 48</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:length value="1"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="GuaranteeCode" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>PIB podnosioca garancije  - popunjava se ako se ovo polje odnosi na rubriku 48</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:minLength value="9"/>
+												<xsd:maxLength value="13"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="ResponsibleCustomsOffice" type="CustomsOfficeCode" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Carinska ispostava koja je evidentirala garanciju ili obezbedjenje</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="YearOfIssueance" type="xsd:short" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Godina garancije  ili obezbedjenja</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="NumberOfGuarantee" type="xsd:int" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Broj garancije  ili obezbedjenja</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="CustomsOfficeOfDestination" type="CustomsOfficeCode" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>rubrika 53 - odredisna carinarnica - za izvoz+tranzit</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="SecurityDetails" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="SecurityType">
+										<xsd:annotation>
+											<xsd:documentation>Vrsta obezbedjenja </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:minLength value="0"/>
+												<xsd:maxLength value="2"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="MonetaryAmount" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Iznos obezbedjenja</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:decimal">
+												<xsd:fractionDigits value="2"/>
+												<xsd:totalDigits value="15"/>
+												<xsd:minInclusive value="0"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="Warehouse" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Rubrika 49</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="ResponsibleCustomsOffice" type="CustomsOfficeCode">
+										<xsd:annotation>
+											<xsd:documentation>Sifra carinarnice skladista</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="WarehouseCoded" type="xsd:int">
+										<xsd:annotation>
+											<xsd:documentation>Sifra skladista</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="WarehouseRefNumber" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Broj iz evidencije magacinske knjige</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:minLength value="0"/>
+												<xsd:maxLength value="10"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="WarehousingDate" type="datum" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Datum smestanja robe u skladiste</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="LocationOfGoods" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Mesto robe - rubrika 30 - za sada se ne popunjava</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:maxLength value="5"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="ReturnDate" type="xsd:dateTime" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Datum vracanje robe koja je privremeno uvezena/izvezena</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="DutyTaxPaymentMethod" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>NP - upisuje se sifra nacina placanja ili obezbedjenja placanja carinskog duga iz Kodeksa sifara - rubrika 47 - poslednja potpodela</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:length value="1"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GoodsItemData" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="GoodsItemPackaging" type="ShipingMarks" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Rubrika 31 1.red</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="GoodsDescription" type="GoodsDescriptionType-Clearence" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Rubrika 31 2. red</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="CustomsItem" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Rubrika 33 - tarifna oznaka</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="TariffCodeNumber" minOccurs="0">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:length value="10"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="AditionalCodeNumber" minOccurs="0">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:length value="2"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="TariffQuantity" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>III potpodela</xsd:documentation>
+										</xsd:annotation>
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="MeasureUnitCode" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Sifra jedinice mere</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:length value="2"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="SupplementaryQuantity" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Dopunska jedinica - rubrika 41 Kolicina u jedinici mere</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:decimal">
+															<xsd:totalDigits value="15"/>
+															<xsd:fractionDigits value="2"/>
+															<xsd:minInclusive value="0"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="TariffRegime" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>IV podpodela-Oblici uvoza i izvoza iz kodeksa sifara</xsd:documentation>
+										</xsd:annotation>
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="TariffRegimeCode" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Rezim uvoza/izvoza </xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:minLength value="1"/>
+															<xsd:maxLength value="2"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="PurposeOfImport" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Sifra namene uvoza</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:length value="2"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="PreferentialRegime" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="TaxPreferentialRegimeCode" minOccurs="0">
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:minLength value="0"/>
+															<xsd:maxLength value="4"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="AccisePreferentialRegimeCode" minOccurs="0">
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:minLength value="0"/>
+															<xsd:maxLength value="4"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="CountryOfOrigin" type="Country" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Zemlja porekla</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="GoodsItemMeasurements" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="GrossWeight" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Bruto masa - rubrika 35</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:decimal">
+												<xsd:totalDigits value="15"/>
+												<xsd:fractionDigits value="2"/>
+												<xsd:minInclusive value="0"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="NetNetWeight" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Neto masa - rubrika 38</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:decimal">
+												<xsd:totalDigits value="15"/>
+												<xsd:fractionDigits value="2"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="Cube" type="Measurements" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Zapremina - za sada se ne popunjava</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="TypeOfDutyRegimeCoded" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Sifra zakonskog osnova za oslobodjenje - rubrika 36</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:length value="5"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="CustomsProcedure">
+							<xsd:annotation>
+								<xsd:documentation>Postupak-Rubrika 37</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="CustomsProcedureCoded">
+										<xsd:annotation>
+											<xsd:documentation>Sifra zahtevanog postupka</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:minLength value="2"/>
+												<xsd:maxLength value="2"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="PreviousCustomsProcedureCoded" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Sifra prethodnog carinskog postupka</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:minLength value="2"/>
+												<xsd:maxLength value="2"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="NationalProcedureCoded" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Sifra nacionalnog postupka</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:minLength value="2"/>
+												<xsd:maxLength value="2"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="CustomsAutorizationDocument" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Evidencion broj pod kojim je  u upravi carina evidentirano resenje doneto na osnovu clana 397. CZ  - rubrika 39</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="DocumentNumber" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Broj resenja</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:int">
+												<xsd:minInclusive value="0"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="DocumentYear" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Godina resenja</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:short">
+												<xsd:minInclusive value="0"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="PreviousCustomsDocuments" type="PreviousCustomsDocumentsTypeClearence" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Sazeta deklaracija/prethodni dokument - rubrika 40</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="CustomsValue" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Cena robe - rubrika 42</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:decimal">
+									<xsd:totalDigits value="15"/>
+									<xsd:fractionDigits value="2"/>
+									<xsd:minInclusive value="0"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="ValuationMethod" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Sifra metoda vrednovanja</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:length value="1"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="Manufacturer" type="PartyRelatedInformation" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Proizvodjac - za sada se ne koristi</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="StatisticalValue" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Statisticka vrednost - rubrika 46</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:decimal">
+									<xsd:totalDigits value="15"/>
+									<xsd:fractionDigits value="2"/>
+									<xsd:minInclusive value="0"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="ValuationAdjustment" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Prilagodjavanje - rubrika 45 - za sada se ne popunjava</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:decimal">
+									<xsd:minInclusive value="0"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="AdditionalDocumentInformation" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Rubrika 44</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="AdditionalDocument" maxOccurs="unbounded">
+										<xsd:annotation>
+											<xsd:documentation>Prateca dokumenta</xsd:documentation>
+										</xsd:annotation>
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="Type">
+													<xsd:annotation>
+														<xsd:documentation>Sifra dokumenta, pri cemu je prvi znak slovna oznaka grupe podataka (V,E,F,I,O,U,S ili P)</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:length value="3"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="DocumentIDNumber" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Broj prilozene isprave-Interni</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:int">
+															<xsd:minInclusive value="0"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="Date" type="datum" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Datum izdavanja prilozene isprave ili neki referentni datum uz postupak</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+												<xsd:element name="PartyCode" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>PIB uz prilozenu ispravu/uverenje/odobrenje</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:integer">
+															<xsd:minInclusive value="000000001"/>
+															<xsd:maxInclusive value="9999999999999"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="IssuerCode" type="CustomsOfficeCode" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Sifra organizacione jedinice Upreve Carina, koja je izdala ispravu</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+												<xsd:element name="DeclarationType" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Vrsta carinske isprave vezane za dati dokument</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:length value="2"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="Year" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Godina prilozene isprave</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:short">
+															<xsd:minInclusive value="0"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="Country" type="Country" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Sifra zemlje iz prilozene isprave</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+												<xsd:element name="TypeOfDutyRegimeCoded" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Sifra zakonskog osnova za oslobodjenje iz prilozene isprave</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:length value="5"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="AdditionalInformation" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Upisuju se sadrzinski podaci koji su vezani za odabranu sifru (na pr. redni broj dokumenta, iznos prevoznih trosokova,...</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:minLength value="0"/>
+															<xsd:maxLength value="30"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="FinalProductNumber" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Redni broj finlnog proizvoda</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:short">
+															<xsd:minInclusive value="0"/>
+															<xsd:maxInclusive value="999"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="FinancialDetails" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Upisuju se iznos i sifra valute u prilozenoj ispravi</xsd:documentation>
+													</xsd:annotation>
+													<xsd:complexType>
+														<xsd:sequence>
+															<xsd:element name="CurrencyCode" minOccurs="0">
+																<xsd:annotation>
+																	<xsd:documentation>Sifra valute u prilozenoj ispravi</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:length value="3"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:element>
+															<xsd:element name="MonetaryAmount">
+																<xsd:annotation>
+																	<xsd:documentation>Iznos u prilozenoj ispravi</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:decimal">
+																		<xsd:totalDigits value="15"/>
+																		<xsd:fractionDigits value="2"/>
+																		<xsd:minInclusive value="0"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:element>
+														</xsd:sequence>
+													</xsd:complexType>
+												</xsd:element>
+											</xsd:sequence>
+											<xsd:attribute name="IDNo" use="required">
+												<xsd:simpleType>
+													<xsd:restriction base="xsd:int">
+														<xsd:minInclusive value="1"/>
+													</xsd:restriction>
+												</xsd:simpleType>
+											</xsd:attribute>
+											<xsd:attribute name="ReferrallIndicator" type="xsd:boolean" use="required"/>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="DutyTaxFeeInformation" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Rubrika 47</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="DutyTaxFeeDetails" maxOccurs="unbounded">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="DutyTaxFeeType">
+													<xsd:annotation>
+														<xsd:documentation>Sifra vrste dazbina iz Kodeksa sifara</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:length value="2"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="DutyTaxFeeBase" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Osnovica - upisuje se vrednsot, kolicina ili druga propisana osnovica za obracun dazbiina</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:decimal">
+															<xsd:fractionDigits value="2"/>
+															<xsd:totalDigits value="15"/>
+															<xsd:minInclusive value="0"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="DutyTaxFeeRate" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Stopa - stopa dazbine navedene u prvoj potpodeli</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:decimal">
+															<xsd:totalDigits value="7"/>
+															<xsd:fractionDigits value="2"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="DutyTypeFeeAmount" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Iznos - iznos dazbine, ako nije propisana stopa dazbine, odnosno ako je propisana u jedinici mere</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:decimal">
+															<xsd:fractionDigits value="2"/>
+															<xsd:totalDigits value="15"/>
+															<xsd:minInclusive value="0"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="GroupDutyCode" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Sifra grupne dazbine -trenutno se ne popunjava</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:maxLength value="4"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+											</xsd:sequence>
+											<xsd:attribute name="IDNo" type="xsd:int" use="required"/>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+								<xsd:attribute name="total" type="xsd:decimal" use="optional"/>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+					<xsd:attribute name="GoodsItemNumber" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:minInclusive value="1"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="CustomsOfficeOfDeclarationCode" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:length value="5"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="DocumentNumber" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:minLength value="1"/>
+					<xsd:maxLength value="20"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="VersionNumber" type="xsd:int" use="optional" default="0"/>
+		<xsd:attribute name="OperationCode" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="INSERT"/>
+					<xsd:enumeration value="UPDATE"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="ActionControlCode" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:minLength value="2"/>
+					<xsd:maxLength value="2"/>
+					<xsd:enumeration value="KI"/>
+					<xsd:enumeration value="PC"/>
+					<xsd:enumeration value="KP"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="DateOfArrivalAtFirstCustomsPort" type="datum" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="SadTransitType">
+		<xsd:sequence>
+			<xsd:element name="Header">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="DeclarationType">
+							<xsd:annotation>
+								<xsd:documentation>Tip deklaracije</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="TransitTypeCoded">
+										<xsd:annotation>
+											<xsd:documentation>Deklaracija - rubrika 1         Vrsta tranzita - III potpodela</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:length value="2"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="PartiesInvolved" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="ConsignorExporter" type="PartyRelatedInformation" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Posiljalac - izvoznik - rubrika 2</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="ConsigneeImporter" type="PartyRelatedInformation" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Primalac - rubrika 8</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="DeclarantRepresentativ" type="PartyRelatedInformation">
+										<xsd:annotation>
+											<xsd:documentation>Deklarant - zastupnik - rubrika 14</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="Forms" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Obrasci - ukupan broj obrazaca - rubrika 3</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:short">
+									<xsd:minInclusive value="1"/>
+									<xsd:maxInclusive value="334"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="TransportDocNumber" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Broj tovarnih listova - Rubrika 4</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:short">
+									<xsd:minInclusive value="0"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="GoodsItemNumber">
+							<xsd:annotation>
+								<xsd:documentation>Ukupan broj naimenovanja - rubrika 5</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:short">
+									<xsd:minInclusive value="1"/>
+									<xsd:maxInclusive value="999"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="TotalNumberOfPackages" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>broj koleta - rubrika 6</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:integer">
+									<xsd:minInclusive value="0"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="CountryWhenceConsigned" type="Country" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Zemlja otpreme-rubrika 15</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="CountryOfOrigin" type="Country" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Zemlja porekla</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="DeliveryDestination" type="Country" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Zemlja odredista-rubrika 17</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="IdentificationOfContainerTransport" type="xsd:boolean" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Kontejner - rubrika 19</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="TotalInvoiceAmount" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Rubrike 22 i 23</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="CurrencyCode" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Sifra valute</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:length value="3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="MonetaryAmount" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Ukupan iznos fakture</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:decimal">
+												<xsd:totalDigits value="15"/>
+												<xsd:fractionDigits value="2"/>
+												<xsd:minInclusive value="0"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="RateOfExchange" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Kurs valute</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:decimal">
+												<xsd:totalDigits value="15"/>
+												<xsd:fractionDigits value="6"/>
+												<xsd:minInclusive value="0"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="AdditionalDocumentReferenceNumber" type="xsd:string" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Referentni broj - rubrika 7</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="TaxPointDate" type="xsd:dateTime" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Datum primene propisa - rubrika 7 II potpodela</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="TransportationDetails" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="ModeOfTransportAtBorder" type="ModeOfTransport" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Rubrika 25 - Vrsta saobracaja na granici</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="MeansOfTransportAtArrival" minOccurs="0" maxOccurs="999">
+										<xsd:annotation>
+											<xsd:documentation>Identifikacija i nacionalnost prevoznog sredstva u odlasku/prispecu - rubrika 18</xsd:documentation>
+										</xsd:annotation>
+										<xsd:complexType>
+											<xsd:complexContent>
+												<xsd:extension base="MeanOfTransport">
+													<xsd:attribute name="ID" use="required">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:int">
+																<xsd:minInclusive value="0"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:attribute>
+												</xsd:extension>
+											</xsd:complexContent>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="TransportCrossingBorder" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Rubrika 21</xsd:documentation>
+										</xsd:annotation>
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="MeansOfTransportCrossingBorder" type="MeanOfTransport" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Rubrika 21 - za sada se ne popunjava</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+												<xsd:element name="ModeOfTransportCrossingTheBorder" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Vrsta saobracaja koja prelazi granicu</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:length value="2"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="ModefTransportInland" type="ModeOfTransport" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Rubrika 26 - Unutrasnja vrsta saobracaja - za sada se ne popunjava</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="PlaceOfLoading" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Mesto utovara - rubrika 27 - za sada se ne popunjava</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="5"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="PlaceOfDischarge" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Mesto  istovara - rubrika 27 - za sada se ne popunjava</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="5"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+								</xsd:sequence>
+								<xsd:attribute name="IsList" type="xsd:boolean" use="required"/>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="CustomsOfficeOfEntry" type="CustomsOfficeCode" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Carinska ispostava istupa/ulaza - rubrika 29 - za sada se ne popunjava</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="LocationOfGoods" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Mesto robe - rubrika 30 - za sada se ne popunjava</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:maxLength value="5"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="Guarantee" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Garancija - rubrika 50, 52</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="GuaranteeDetails" type="GuaranteeType">
+										<xsd:annotation>
+											<xsd:documentation>Detalji Garancije</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="GuaranteeParty" type="PartyRelatedInformation" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Detalji Garanta</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="CustomsOfficeOfExit" type="CustomsOfficeCode" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>rubrika 53 - odredisna carinarnica - za tranzit</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="ReturnDate" type="xsd:dateTime" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Datum vracanje robe koja je privremeno uvezena/izvezena</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="Warehouse" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Rubrika 49</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="ResponsibleCustomsOffice" type="CustomsOfficeCode">
+										<xsd:annotation>
+											<xsd:documentation>Sifra carinarnice skladista-prva potpodela</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="WarehouseCoded" type="xsd:int">
+										<xsd:annotation>
+											<xsd:documentation>Sifra skladista-deruga popodela</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GoodsItemData" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="ShippingMarks" type="ShipingMarks" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Rubrika 31 1.red</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="GoodsDescription" type="GoodsDescriptionType-Transit" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Rubrika 31 2. red</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="CustomsItem" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Rubrika 33 - tarifna oznaka</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="TariffCodeNumber" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Sifra robe (duzine 6) ili tarifna oznaka</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:minLength value="6"/>
+												<xsd:maxLength value="10"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="AditionalCodeNumber" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Ex broj</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:length value="2"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="TariffQuantity" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>III potpodela</xsd:documentation>
+										</xsd:annotation>
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="MeasureUnitCode">
+													<xsd:annotation>
+														<xsd:documentation>Sifra jedinice mere</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:length value="2"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="SupplementaryQuantity" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Dopunska jedinica - rubrika 41</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:decimal">
+															<xsd:minInclusive value="0"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="TariffRegime" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>IV podpodela-Oblici uvoza i izvoza iz kodeksa sifara</xsd:documentation>
+										</xsd:annotation>
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="TariffRegimeCode">
+													<xsd:annotation>
+														<xsd:documentation>Rezim uvoza/izvoza </xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:length value="2"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="PurposeOfImport" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Sifra namene uvoza</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:length value="2"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="PreferentialRegime" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="TaxPreferentialRegimeCode">
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:length value="4"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="AccisePreferentialRegimeCode">
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:length value="4"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="GoodsItemMeasurements" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="GrossWeight">
+										<xsd:annotation>
+											<xsd:documentation>Bruto masa - rubrika 35</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:decimal">
+												<xsd:totalDigits value="15"/>
+												<xsd:fractionDigits value="2"/>
+												<xsd:minInclusive value="0"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="Cube" type="Measurements" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Zapremina - za sada se ne popunjava</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="CustomsValue" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Cena robe - rubrika 42</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:decimal">
+									<xsd:totalDigits value="15"/>
+									<xsd:fractionDigits value="2"/>
+									<xsd:minInclusive value="0"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="PreviousCustomsDocuments" type="PreviusCustomsDocumentsTypeTransit" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Sazeta deklaracija/prethodni dokument - rubrika 40</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="AdditionalDocumentInformation" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Rubrika 44</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="AdditionalDocument" maxOccurs="unbounded">
+										<xsd:annotation>
+											<xsd:documentation>Prateca dokumenta</xsd:documentation>
+										</xsd:annotation>
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="Type">
+													<xsd:annotation>
+														<xsd:documentation>Tip prilozene isprave koji se uzima iz registra prilozenih isprava(sifarnik)</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:length value="3"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="Date" type="datum" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Datum izdavanja prilozene isprave ili neki referentni datum uz postupak</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+												<xsd:element name="PartyCode" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>PIB uz prilozenu ispravu/uverenje/odobrenje</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:integer">
+															<xsd:minInclusive value="000000001"/>
+															<xsd:maxInclusive value="9999999999999"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="IssuerCode" type="CustomsOfficeCode" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Sifra organizacione jedinice Upreve Carina, koja je izdala ispravu</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+												<xsd:element name="DeclarationType" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Vrsta carinske isprave vezane za dati dokument</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:length value="2"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="DocumentIdNumber" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Broj prilozene isprave(Interni)</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:int">
+															<xsd:minInclusive value="0"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="Year" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Godina prilozene isprave</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:short">
+															<xsd:minInclusive value="0"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="Country" type="Country" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Sifra zemlje iz prilozene isprave</xsd:documentation>
+													</xsd:annotation>
+												</xsd:element>
+												<xsd:element name="TypeOfDutyRegimeCoded" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Sifra zakonskog osnova za oslobodjenje iz prilozene isprave</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:length value="5"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="AdditionalInformation" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Upisuju se sadrzinski podaci koji su vezani za odabranu sifru (na pr. redni broj dokumenta, iznos prevoznih trosokova,...</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:minLength value="0"/>
+															<xsd:maxLength value="30"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="FinancialDetails" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Upisuje se iznos i sifra valute u prilozenoj ispravi</xsd:documentation>
+													</xsd:annotation>
+													<xsd:complexType>
+														<xsd:sequence>
+															<xsd:element name="CurrencyCode">
+																<xsd:annotation>
+																	<xsd:documentation>Sifra valute u prilozenoj ispravi</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:string">
+																		<xsd:length value="3"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:element>
+															<xsd:element name="MonetaryAmount">
+																<xsd:annotation>
+																	<xsd:documentation>Iznos u prilozenoj ispravi</xsd:documentation>
+																</xsd:annotation>
+																<xsd:simpleType>
+																	<xsd:restriction base="xsd:decimal">
+																		<xsd:totalDigits value="15"/>
+																		<xsd:fractionDigits value="2"/>
+																		<xsd:minInclusive value="0"/>
+																	</xsd:restriction>
+																</xsd:simpleType>
+															</xsd:element>
+														</xsd:sequence>
+													</xsd:complexType>
+												</xsd:element>
+												<xsd:element name="FinalProductNumber" minOccurs="0">
+													<xsd:annotation>
+														<xsd:documentation>Redni broj finalnog produkta iz odobrenja</xsd:documentation>
+													</xsd:annotation>
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:short">
+															<xsd:minInclusive value="0"/>
+															<xsd:maxInclusive value="999"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+											</xsd:sequence>
+											<xsd:attribute name="IDNo" use="required">
+												<xsd:simpleType>
+													<xsd:restriction base="xsd:int">
+														<xsd:minInclusive value="1"/>
+													</xsd:restriction>
+												</xsd:simpleType>
+											</xsd:attribute>
+											<xsd:attribute name="ReferralIndicator" type="xsd:boolean" use="required"/>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+					<xsd:attribute name="GoodsItemNumber" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:short">
+								<xsd:minInclusive value="1"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="CustomsOfficeOfDeclarationCode" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:length value="5"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="DateOfArrivalAtFirstCustomsPort" type="datum" use="required"/>
+		<xsd:attribute name="DocumentNumber" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:minLength value="1"/>
+					<xsd:maxLength value="20"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="VersionNumber" type="xsd:int" use="optional" default="0"/>
+		<xsd:attribute name="OperationCode" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="INSERT"/>
+					<xsd:enumeration value="UPDATE"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="ActionControlCode" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:length value="2"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="ShipmentList" type="xsd:boolean" use="optional" default="0"/>
+	</xsd:complexType>
+	<xsd:complexType name="GuaranteeType">
+		<xsd:sequence>
+			<xsd:element name="ResponsibleCustomsOffice" type="CustomsOfficeCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Carinska ispostava koja je evidentirala garanciju ili obezbedjenje</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="YearOfIssueance" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Godina garancije  ili obezbedjenja</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NumberOfGuarantee" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Broj garancije  ili obezbedjenja</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="SecurityType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Vrsta obezbedjenja - rubrika 52</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="2"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="MonerayAmount" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Iznos obezbedjenja - rubrika B</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:fractionDigits value="2"/>
+						<xsd:totalDigits value="15"/>
+						<xsd:minInclusive value="0"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="PreviousCustomsDocumentTypeTransit">
+		<xsd:sequence>
+			<xsd:element name="ResponsibleCustomsOfficce" type="CustomsOfficeCode">
+				<xsd:annotation>
+					<xsd:documentation>Sifra carinske ispostave</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PreviousCustomsDocumentCoded">
+				<xsd:annotation>
+					<xsd:documentation>Sifra vrste prethodne isprave</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="2"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PreviousCustomsDocumentNumber">
+				<xsd:annotation>
+					<xsd:documentation>Broj prethodne isprave</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PreviousCustomsDocumentYear">
+				<xsd:annotation>
+					<xsd:documentation>Godina prihvatanja prethodne isprave</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PreviousCustomsDocumentItemNo" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Redni broj naimenovanja iz prethodne isprave po kojoj je roba bila prijavljena </xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:minInclusive value="0"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="GrossWeight" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Bruto masa razduzenja</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:totalDigits value="15"/>
+						<xsd:fractionDigits value="2"/>
+						<xsd:minInclusive value="0"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NumberOfPackages" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Broj koleta razduzenja</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="IDNo" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:int">
+					<xsd:minInclusive value="1"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:element name="CusResMessage">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="Header" type="HeaderType"/>
+				<xsd:element name="Body">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="ErrorResponse" minOccurs="0" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="ErrorWeight" type="xsd:string"/>
+										<xsd:element name="ErrorDescription" type="xsd:string"/>
+									</xsd:sequence>
+									<xsd:attribute name="AgentCode" type="xsd:string" use="required"/>
+									<xsd:attribute name="ResponsibleCustomsOfficeCoded" type="xsd:string" use="required"/>
+									<xsd:attribute name="DocumentSubmitionDate" type="xsd:dateTime" use="required"/>
+									<xsd:attribute name="DocumentNumber" type="xsd:string" use="required"/>
+									<xsd:attribute name="GoodsItemNumber" type="xsd:int" use="optional"/>
+									<xsd:attribute name="VersionNumber" type="xsd:int" use="required"/>
+									<xsd:attribute name="DeclarationBoxNumber" type="xsd:int" use="optional"/>
+									<xsd:attribute name="IDNo" type="xsd:int" use="optional"/>
+									<xsd:attribute name="MessageNumber" type="xsd:int" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Response" maxOccurs="unbounded">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:choice>
+											<xsd:sequence>
+												<xsd:element name="Code" type="xsd:string"/>
+												<xsd:element name="Description" type="xsd:string"/>
+											</xsd:sequence>
+											<xsd:sequence>
+												<xsd:element name="Token" type="xsd:string"/>
+											</xsd:sequence>
+										</xsd:choice>
+									</xsd:sequence>
+									<xsd:attribute name="DocumentNumber" type="xsd:string" use="required"/>
+									<xsd:attribute name="AgentCode" type="xsd:string" use="required"/>
+									<xsd:attribute name="ResponsiblePartyCode" use="required">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="13"/>
+												<xsd:minLength value="9"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="DocumentSubmitionDate" type="datum" use="required"/>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:complexType name="HeaderType">
+		<xsd:sequence>
+			<xsd:element name="SenderDetails">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="IDAuthentication">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="SenderID" type="xsd:string"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="Topic" type="xsd:string"/>
+						<xsd:element name="Version" type="xsd:string" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SummDecType">
+		<xsd:sequence>
+			<xsd:element name="Header">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="PartiesInvolved">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="ResponsibleParty">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="PartyCode">
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:integer">
+															<xsd:minInclusive value="000000001"/>
+															<xsd:maxInclusive value="9999999999999"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="PartyNameAddress">
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:minLength value="5"/>
+															<xsd:maxLength value="60"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+												<xsd:element name="PartyDocumentNumber" minOccurs="0">
+													<xsd:simpleType>
+														<xsd:restriction base="xsd:string">
+															<xsd:maxLength value="13"/>
+														</xsd:restriction>
+													</xsd:simpleType>
+												</xsd:element>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="Guarantee" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Garancija</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="Details" type="GuaranteeType" minOccurs="0"/>
+									<xsd:element name="GuaranteePartyCode" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>PIB podnosioca garancije</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:integer">
+												<xsd:minInclusive value="000000001"/>
+												<xsd:maxInclusive value="9999999999999"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="Warehouse" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Rubrike 4 i 5</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="ResponsibleCustomsOffice" type="CustomsOfficeCode" minOccurs="0" maxOccurs="0"/>
+									<xsd:element name="WarehouseCoded">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:minLength value="1"/>
+												<xsd:maxLength value="5"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="WarehouseRefNumber" minOccurs="0">
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="10"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="WarehousingDateTime" minOccurs="0">
+										<xsd:complexType>
+											<xsd:sequence>
+												<xsd:element name="WarehousingDate" type="datum"/>
+												<xsd:element name="WarehousingTime" type="xsd:time" minOccurs="0"/>
+											</xsd:sequence>
+										</xsd:complexType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="TransportDocument">
+							<xsd:annotation>
+								<xsd:documentation>Prevozna Isprava (Rubrika 3)</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="TransportDocumentType">
+										<xsd:annotation>
+											<xsd:documentation>Tip prevozne isprave </xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="4"/>
+												<xsd:minLength value="2"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="TransportDocumentNumber">
+										<xsd:annotation>
+											<xsd:documentation>Broj prevozne isprave</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="20"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="AdditionalTransportData" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Dodatne informacije</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="20"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="TransportationDetails" minOccurs="0">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="RoadTransportationDetails" minOccurs="0" maxOccurs="999">
+										<xsd:annotation>
+											<xsd:documentation>Rubrika 2</xsd:documentation>
+										</xsd:annotation>
+										<xsd:complexType>
+											<xsd:complexContent>
+												<xsd:extension base="MeanOfTransport">
+													<xsd:attribute name="ID" use="required">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:int">
+																<xsd:minInclusive value="0"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:attribute>
+												</xsd:extension>
+											</xsd:complexContent>
+										</xsd:complexType>
+									</xsd:element>
+									<xsd:element name="TransportID" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Ime broda, oznaka leta ili voza(1 red rubrike 2)</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="30"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="DateOfFlight" type="datum" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Datum Leta (2 podela reda1 rubrike 1 u avionskom saobracaju)</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="Nationality" type="Country" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Nacionalnost prevoznog sredstva</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+								<xsd:attribute name="IsList" type="xsd:boolean" use="required"/>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="TypeOfTransportation">
+							<xsd:annotation>
+								<xsd:documentation>Sifra saobracaja na granici</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:length value="2"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GoodsItemData" maxOccurs="999">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="ShipingMarks" type="ShipingMarks" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Rubrika 9</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="GoodsDescription" type="GoodsDescriptionType-Transit" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Opis robe (Rubrika 9)</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="CustomsGoodsType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Vrsta carinske robe - rubrika 9</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:length value="1"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="GrossWeight" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Rubrika 10</xsd:documentation>
+							</xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:decimal">
+									<xsd:totalDigits value="15"/>
+									<xsd:fractionDigits value="2"/>
+									<xsd:minInclusive value="0"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:element>
+						<xsd:element name="PreviousCustomsDocument" type="PreviousCustomsDocumentTypeTransit" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>PrethodnaIsprava (Rubrika 11)</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="SparePartIndicator" type="xsd:boolean" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Indikator kruzeceg dela - za avione</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="Warehouse" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Identifikacija prostora za privremeni smestaj               (Rubrika 4)</xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="WarehouseCoded" type="xsd:int">
+										<xsd:annotation>
+											<xsd:documentation>Sifra prostora za privremeni smestaj </xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="WarehouseRefNumber">
+										<xsd:annotation>
+											<xsd:documentation>Broj iz evidencije magacinske knjige</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="10"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="WarehousePosition" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Pozicija u skladista</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="10"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+						<xsd:element name="TransportDocument" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Rubrika 8 </xsd:documentation>
+							</xsd:annotation>
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="TransportDocumentType">
+										<xsd:annotation>
+											<xsd:documentation>Vrsta tovarnog lista                (Prva potpodela rubrike 8)</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="4"/>
+												<xsd:minLength value="2"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="TransportDocumentNo">
+										<xsd:annotation>
+											<xsd:documentation>Rubrika 8</xsd:documentation>
+										</xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:string">
+												<xsd:maxLength value="20"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:element>
+									<xsd:element name="TransportDocumentIndicator" type="xsd:boolean" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Indikator tovarnog lista </xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+					<xsd:attribute name="GoodsItemNumber" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:int">
+								<xsd:minInclusive value="1"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="CustomsOfficeOfDeclarationCode" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:length value="5"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="DateOfArrivalAtFirstCustomsPort" type="datum" use="required"/>
+		<xsd:attribute name="DocumentNumber" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:minLength value="1"/>
+					<xsd:maxLength value="20"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="VersionNumber" type="xsd:int" use="optional" default="0"/>
+		<xsd:attribute name="OperationCode" type="xsd:string" use="required"/>
+		<xsd:attribute name="ActionControlCode" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:string">
+					<xsd:length value="2"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="PreviousCustomsDocumentTypeClearence">
+		<xsd:sequence>
+			<xsd:element name="ResponsibleCustomsOffice" type="CustomsOfficeCode">
+				<xsd:annotation>
+					<xsd:documentation>Sifra carinske ispostave prethodnog dokumenta</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="PreviousCustomsDocumentCoded">
+				<xsd:annotation>
+					<xsd:documentation>Sifra vrste prethodne isprave</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:length value="2"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PreviousCustomsDocumentNumber">
+				<xsd:annotation>
+					<xsd:documentation>Broj prethodne isprave</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PreviousCustomsDocumentYear">
+				<xsd:annotation>
+					<xsd:documentation>Godina prihvatanja prethodne isprave</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="PreviousCustomsItemDocumentNo" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Redni broj naimenovanja iz prethodne isprave po kojoj je roba bila prijavljena</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:short">
+						<xsd:minInclusive value="0"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="GrossWeight" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Bruto masa razduzenja</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:decimal">
+						<xsd:totalDigits value="15"/>
+						<xsd:fractionDigits value="2"/>
+						<xsd:minInclusive value="0"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="NumberOfPackages" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Broj koleta razduzenja</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:int">
+						<xsd:minInclusive value="0"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="DischargeOfGoods" type="Measurements" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Kolicina Razduzenja</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="IDNo" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:int">
+					<xsd:minInclusive value="1"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="PreviousCustomsDocumentsTypeClearence">
+		<xsd:sequence>
+			<xsd:element name="PreviousCustomsDocument" type="PreviousCustomsDocumentTypeClearence" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="datum">
+		<xsd:restriction base="xsd:date">
+			<xsd:minInclusive value="1900-01-01"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>
