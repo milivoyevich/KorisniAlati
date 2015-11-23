@@ -16,6 +16,7 @@ namespace KorisniAlati {
 //
 //            return ImportExcelXLS(fileName, hasHeaders);
 //        }
+
         public static DataSet ImportExcelXLS(string FileName, bool hasHeaders) {
             string HDR = hasHeaders ? "Yes" : "No";
             string strConn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + FileName + ";Extended Properties=\"Excel 8.0;HDR=" + HDR + ";IMEX=1\"";

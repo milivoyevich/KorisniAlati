@@ -12,7 +12,6 @@ namespace KorisniAlati
         {
             System.IO.StreamWriter excelDoc;
             int[] sir_kol = new int[150];
-
             excelDoc = new System.IO.StreamWriter(fileName);
             const string startExcelXML = "<?xml version=\"1.0\"?>\r\n<?mso-application progid=\"Excel.Sheet\"?>\r\n<Workbook " +
                   "xmlns=\"urn:schemas-microsoft-com:office:spreadsheet\"\r\n" +
